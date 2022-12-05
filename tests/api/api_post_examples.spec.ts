@@ -36,7 +36,7 @@ test.describe("API POST 200 Request", () => {
     expect(responseBody).toHaveProperty("createdAt");
   });
 
-  test("[9, API] should get a 200 response after a POST request to register a new user successfully", async ({
+  test.skip("[9, API] should get a 200 response after a POST request to register a new user successfully", async ({
     request,
     baseURL,
   }) => {
@@ -55,7 +55,7 @@ test.describe("API POST 200 Request", () => {
     expect(responseBody).toHaveProperty("token");
   });
 
-  test("[10, API] should get a 400 response after a POST request to register a new user without a password set unsuccessfully", async ({
+  test.skip("[10, API] should get a 400 response after a POST request to register a new user without a password set unsuccessfully", async ({
     request,
     baseURL,
   }) => {
@@ -72,7 +72,7 @@ test.describe("API POST 200 Request", () => {
     expect(responseBody.error).toEqual("Missing password");
   });
 
-  test("[11, API] should get a 200 response after a POST request to login with a user successfully", async ({
+  test.skip("[11, API] should get a 200 response after a POST request to login with a user successfully", async ({
     request,
     baseURL,
   }) => {
@@ -91,7 +91,7 @@ test.describe("API POST 200 Request", () => {
     expect(responseBody.token).toEqual("QpwL5tke4Pnpja7X4");
   });
 
-  test("[12, API] should get a 400 response after a POST request to login with a user without a password set unsuccessfully", async ({
+  test.skip("[12, API] should get a 400 response after a POST request to login with a user without a password set unsuccessfully", async ({
     request,
     baseURL,
   }) => {
