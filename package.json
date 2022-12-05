@@ -1,0 +1,22 @@
+{
+  "name": "playwright-template",
+  "version": "1.0.0",
+  "description": "Example of a project with Playwright, Typescript and some integrations.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/estefafdez/playwright-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/estefafdez/playwright-template/issues"
+  },
+  "homepage": "https://github.com/estefafdez/playwright-template#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.28.1",
+    "playwright": "^1.28.1"
+  }
+}
