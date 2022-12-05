@@ -45,30 +45,11 @@ const config: PlaywrightTestConfig = {
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-
-    {
-      name: "firefox",
-      use: {
-        ...devices["Desktop Firefox"],
-      },
-    },
-
-    {
-      name: "webkit",
-      use: {
-        ...devices["Desktop Safari"],
-      },
-    },
-    {
       name: "API Project",
       testMatch: "api/**/*",
       use: {
         baseURL: "https://reqres.in",
+        ...devices["Desktop Chrome"],
       },
     },
     {
@@ -76,6 +57,7 @@ const config: PlaywrightTestConfig = {
       testMatch: "web/**/*",
       use: {
         baseURL: "https://demo.seleniumeasy.com",
+        ...devices["Desktop Chrome"],
       },
     },
   ],
