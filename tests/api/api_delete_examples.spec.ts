@@ -6,7 +6,7 @@ test.describe("API DELETE 200 Request", () => {
     request,
     baseURL,
   }) => {
-    const deleteRequest = await request.delete(`${baseURL}/api/users/2`);
-    expect(deleteRequest.status()).toBe(204);
+    const response = await request.delete(`${baseURL}/api/users/2`);
+    expect(response.status()).toBe(204);
   });
 });
