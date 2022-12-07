@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "open": "npx playwright open",
-    "test": "npx playwright test",
+    "test": "QASE_REPORT=1 npx playwright test",
     "debug": "npx playwright test --debug",
-    "test:api": "npx playwright test  --project=api",
-    "test:web": "npx playwright test  --project=web"
+    "test:api": "QASE_REPORT=1 npx playwright test  --project=api",
+    "test:web": "QASE_REPORT=1 npx playwright test  --project=web",
+    "report": "npx playwright show-report"
   },
   "repository": {
     "type": "git",
