@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "Example of a project with Playwright, Typescript and some integrations.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "open": "npx playwright open",
+    "test": "npx playwright test",
+    "debug": "npx playwright test --debug",
+    "test:api": "npx playwright test  --project=api",
+    "test:web": "npx playwright test  --project=web"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/estefafdez/playwright-template.git"
@@ -18,5 +24,8 @@
   "devDependencies": {
     "@playwright/test": "^1.28.1",
     "playwright": "^1.28.1"
+  },
+  "dependencies": {
+    "playwright-qase-reporter": "^1.2.0-alpha.3"
   }
 }

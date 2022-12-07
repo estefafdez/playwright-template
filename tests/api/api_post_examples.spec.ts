@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { qase } from "playwright-qase-reporter/dist/playwright";
 
 const fs = require("fs");
 const userDataPath = `${__dirname}/../../data/users`;
@@ -14,97 +15,112 @@ const user3 = JSON.parse(user3Data);
 const user4 = JSON.parse(user4Data);
 
 test.describe("API POST 200 Request", () => {
-  test("[8, API] should get a 201 response after a POST request to create a new user", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.post(`${baseURL}/api/users`, {
-      data: {
-        body: {
-          name: user1.name,
-          job: user1.job,
+  test(
+    qase(
+      [8],
+      "[8, API] should get a 201 response after a POST request to create a new user"
+    ),
+    async ({ request, baseURL }) => {
+      const response = await request.post(`${baseURL}/api/users`, {
+        data: {
+          body: {
+            name: user1.name,
+            job: user1.job,
+          },
         },
-      },
-    });
+      });
 
-    const responseBody = await response.json();
+      const responseBody = await response.json();
 
-    expect(response.status()).toBe(201);
-    expect(responseBody.body.name).toEqual("Estefania");
-    expect(responseBody.body.job).toEqual("QA Automation Engineer");
-    expect(responseBody).toHaveProperty("id");
-    expect(responseBody).toHaveProperty("createdAt");
-  });
+      expect(response.status()).toBe(201);
+      expect(responseBody.body.name).toEqual("Estefania");
+      expect(responseBody.body.job).toEqual("QA Automation Engineer");
+      expect(responseBody).toHaveProperty("id");
+      expect(responseBody).toHaveProperty("createdAt");
+    }
+  );
 
-  test.skip("[9, API] should get a 200 response after a POST request to register a new user successfully", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.post(`${baseURL}/api/register`, {
-      data: {
-        body: {
-          email: user1.email,
-          password: user1.password,
+  test.skip(
+    qase(
+      [9],
+      "[9, API] should get a 200 response after a POST request to register a new user successfully"
+    ),
+    async ({ request, baseURL }) => {
+      const response = await request.post(`${baseURL}/api/register`, {
+        data: {
+          body: {
+            email: user1.email,
+            password: user1.password,
+          },
         },
-      },
-    });
+      });
 
-    const responseBody = await response.json();
-    expect(response.status()).toBe(200);
-    expect(responseBody).toHaveProperty("id");
-    expect(responseBody).toHaveProperty("token");
-  });
+      const responseBody = await response.json();
+      expect(response.status()).toBe(200);
+      expect(responseBody).toHaveProperty("id");
+      expect(responseBody).toHaveProperty("token");
+    }
+  );
 
-  test.skip("[10, API] should get a 400 response after a POST request to register a new user without a password set unsuccessfully", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.post(`${baseURL}/api/register`, {
-      data: {
-        body: {
-          email: user3.email,
+  test.skip(
+    qase(
+      [10],
+      "[10, API] should get a 400 response after a POST request to register a new user without a password set unsuccessfully"
+    ),
+    async ({ request, baseURL }) => {
+      const response = await request.post(`${baseURL}/api/register`, {
+        data: {
+          body: {
+            email: user3.email,
+          },
         },
-      },
-    });
+      });
 
-    const responseBody = await response.json();
-    expect(response.status()).toBe(400);
-    expect(responseBody.error).toEqual("Missing password");
-  });
+      const responseBody = await response.json();
+      expect(response.status()).toBe(400);
+      expect(responseBody.error).toEqual("Missing password");
+    }
+  );
 
-  test.skip("[11, API] should get a 200 response after a POST request to login with a user successfully", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.post(`${baseURL}/api/login`, {
-      data: {
-        body: {
-          email: user2.email,
-          password: user2.password,
+  test.skip(
+    qase(
+      [11],
+      "[11, API] should get a 200 response after a POST request to login with a user successfully"
+    ),
+    async ({ request, baseURL }) => {
+      const response = await request.post(`${baseURL}/api/login`, {
+        data: {
+          body: {
+            email: user2.email,
+            password: user2.password,
+          },
         },
-      },
-    });
+      });
 
-    const responseBody = await response.json();
-    expect(response.status()).toBe(200);
-    expect(responseBody).toHaveProperty("id");
-    expect(responseBody.token).toEqual("QpwL5tke4Pnpja7X4");
-  });
+      const responseBody = await response.json();
+      expect(response.status()).toBe(200);
+      expect(responseBody).toHaveProperty("id");
+      expect(responseBody.token).toEqual("QpwL5tke4Pnpja7X4");
+    }
+  );
 
-  test.skip("[12, API] should get a 400 response after a POST request to login with a user without a password set unsuccessfully", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.post(`${baseURL}/api/login`, {
-      data: {
-        body: {
-          email: user4.email,
+  test.skip(
+    qase(
+      [12],
+      "[12, API] should get a 400 response after a POST request to login with a user without a password set unsuccessfully"
+    ),
+    async ({ request, baseURL }) => {
+      const response = await request.post(`${baseURL}/api/login`, {
+        data: {
+          body: {
+            email: user4.email,
+          },
         },
-      },
-    });
+      });
 
-    const responseBody = await response.json();
-    expect(response.status()).toBe(400);
-    expect(responseBody.error).toEqual("Missing password");
-  });
+      const responseBody = await response.json();
+      expect(response.status()).toBe(400);
+      expect(responseBody.error).toEqual("Missing password");
+    }
+  );
 });
