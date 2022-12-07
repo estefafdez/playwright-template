@@ -53,7 +53,7 @@ const config: PlaywrightTestConfig = {
     [
       "playwright-qase-reporter",
       {
-        apiToken: "{QASE_API_TOKEN}",
+        apiToken: "QASE_API_TOKEN",
         projectCode: "CYEX",
         runComplete: true,
         basePath: "https://api.qase.io/v1",
