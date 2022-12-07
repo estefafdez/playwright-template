@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: 16
 
-      - name: Replace Qase API Token secret on the package.json
+      - name: Replace Qase API Token secret on the playwright.config.ts
         uses: jacobtomlinson/gha-find-replace@master
         with:
           find: "{QASE_API_TOKEN}"
