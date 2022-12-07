@@ -17,10 +17,9 @@ jobs:
       - name: Replace Qase API Token secret on the playwright.config.ts
         uses: jacobtomlinson/gha-find-replace@master
         with:
-          find: "QASE_API_TOKEN"
-          replace: ${{ secrets.QASE_API_TOKEN }}
-      - name: check
-        run: ${{ secrets.QASE_API_TOKEN }}
+          find: "{QASE_API_TOKEN}"
+          # API Token to be removed
+          replace: "e03d1328275d9e48b4b56888172f72a144385805"
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
