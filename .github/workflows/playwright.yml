@@ -20,7 +20,7 @@ jobs:
           find: "QASE_API_TOKEN"
           replace: ${{ secrets.QASE_API_TOKEN }}
       - name: check
-        run: cat playwright.config.ts
+        run: ${{ secrets.QASE_API_TOKEN }}
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
