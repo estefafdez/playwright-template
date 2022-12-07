@@ -50,17 +50,17 @@ const config: PlaywrightTestConfig = {
   reporter: [
     ["junit", xrayOptions],
     ["html"],
-    [
-      "playwright-qase-reporter",
-      {
-        apiToken: "QASE_API_TOKEN",
-        projectCode: "CYEX",
-        runComplete: true,
-        basePath: "https://api.qase.io/v1",
-        logging: true,
-        uploadAttachments: true,
-      },
-    ],
+    // [
+    //   "playwright-qase-reporter",
+    //   {
+    //     apiToken: "e03d1328275d9e48b4b56888172f72a144385805",
+    //     projectCode: "CYEX",
+    //     runComplete: true,
+    //     basePath: "https://api.qase.io/v1",
+    //     logging: true,
+    //     uploadAttachments: true,
+    //   },
+    // ],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
