@@ -47,21 +47,7 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [
-    ["junit", xrayOptions],
-    ["html"],
-    // [
-    //   "playwright-qase-reporter",
-    //   {
-    //     apiToken: "e03d1328275d9e48b4b56888172f72a144385805",
-    //     projectCode: "CYEX",
-    //     runComplete: true,
-    //     basePath: "https://api.qase.io/v1",
-    //     logging: true,
-    //     uploadAttachments: true,
-    //   },
-    // ],
-  ],
+  reporter: [["junit", xrayOptions], ["html"]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     actionTimeout: 0,
