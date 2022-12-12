@@ -1,4 +1,4 @@
-import { test, Page } from "@playwright/test";
+import { test } from "@playwright/test";
 import HomePage from "../../pageobject/HomePage";
 
 test.describe("Home Tests", () => {

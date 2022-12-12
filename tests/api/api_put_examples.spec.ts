@@ -17,7 +17,6 @@ test.describe("API PUT 200 Request", () => {
     const responseBody = await response.json();
 
     expect(response.status()).toBe(200);
-    console.log(responseBody);
     expect(responseBody.body.name).toEqual("morpheus");
     expect(responseBody.body.job).toEqual("zion resident");
     expect(responseBody).toHaveProperty("updatedAt");

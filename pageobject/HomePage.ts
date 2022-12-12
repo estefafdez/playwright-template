@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import { baseURL } from "../config/baseURL";
 import FooterElements from "../elements/FooterElements";
 import HeaderElements from "../elements/HeaderElements";
