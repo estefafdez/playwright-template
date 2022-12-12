@@ -17,7 +17,7 @@ export class HomePage {
     this.page = page;
     this.header = new HeaderElements(this.page);
     this.footer = new FooterElements(this.page);
-    this.menu = new MenuElements();
+    this.menu = new MenuElements(this.page);
   }
 
   /**
