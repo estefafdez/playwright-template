@@ -1,7 +1,16 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 
 export class HeaderElements {
   readonly page: Page;
+  readonly seleniumEasyLogo: Locator;
+  readonly crossBrowserTestingLogo: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+
+    this.seleniumEasyLogo = this.page.locator(".logo > a > img");
+    this.crossBrowserTestingLogo = this.page.locator(".cbt");
+  }
 
   /**
    * Method to check if the Header is visible
@@ -9,21 +18,6 @@ export class HeaderElements {
   async isReady() {
     await expect(this.page.locator(".topper")).toBeVisible();
     await expect(this.page.locator(".navbar")).toBeVisible();
-  }
-
-  /**
-   * Method to get the Selenium Easy Logo
-   */
-
-  getSeleniumEasyLogo() {
-    return this.page.locator(".logo > a > img");
-  }
-
-  /**
-   * Method to get the Cross Browser Testing Logo
-   */
-  getCrossBrowserTestingLogo() {
-    return this.page.locator(".cbt");
   }
 
   /*--------------------------------------------------------------------* 

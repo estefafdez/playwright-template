@@ -1,4 +1,5 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
+import { baseURL } from "../config/baseURL";
 import FooterElements from "../elements/FooterElements";
 import HeaderElements from "../elements/HeaderElements";
 import MenuElements from "../elements/MenuElements";
@@ -7,14 +8,15 @@ export class HomePage {
   footer: any;
   header: any;
   menu: any;
-  page: any;
+  readonly page: Page;
 
   /**
    * Homepage constructor. We need to create a new instance of the Header and the Footer.
    */
-  constructor() {
-    this.header = new HeaderElements();
-    this.footer = new FooterElements();
+  constructor(page: Page) {
+    this.page = page;
+    this.header = new HeaderElements(this.page);
+    this.footer = new FooterElements(this.page);
     this.menu = new MenuElements();
   }
 
@@ -22,7 +24,7 @@ export class HomePage {
    * Method to visit the webpage URL
    */
   async visit() {
-    await this.page.goto("/");
+    await this.page.goto(baseURL.web);
   }
 
   /**
@@ -30,7 +32,7 @@ export class HomePage {
    */
   async isReady() {
     this.header.isReady();
-    expect(this.page.url()).toEqual("https://demo.seleniumeasy.com");
+    expect(this.page.url()).toEqual("https://demo.seleniumeasy.com/");
     await expect(this.page.locator("body > :nth-child(2)")).toBeVisible();
     await expect(this.page.locator("#easycont > :nth-child(1)")).toBeVisible();
     this.footer.isReady();
@@ -57,14 +59,14 @@ export class HomePage {
    * Check that the Selenium Easy Logo is visible.
    */
   checkSeleniumEasyLogoIsVisible() {
-    return this.header.getSeleniumEasyLogo().toBeVisible();
+    return expect(this.header.seleniumEasyLogo).toBeVisible();
   }
 
   /**
    * Check that the CrossBrowserTesting Logo is visible.
    */
   checkCrossBrowserTestingLogoIsVisible() {
-    return this.header.getCrossBrowserTestingLogo().toBeVisible();
+    return expect(this.header.crossBrowserTestingLogo).toBeVisible();
   }
 }
 
