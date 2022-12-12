@@ -2,8 +2,7 @@
 
 Example of a project with Playwright, Typescript and some integrations.
 
-![End-to-end tests with the Playwright Test Framework](https://github.com/estefafdez/playwright-template/actions/badge.svg)
-
+![E2E test with Playwright](https://github.com/estefafdez/playwright-template/actions/workflows/playwright.yml/badge.svg)
 ## Test Plan of this project.
 
 Every test plan defined for this project will be added to the Qase tool.
