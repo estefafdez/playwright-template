@@ -1,62 +1,37 @@
-import { Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export class MenuElements {
   readonly page: Page;
+  readonly allExamplesMenuOption: Locator;
+  readonly inputFormMenuOption: Locator;
+  readonly datePickersMenuOption: Locator;
+  readonly tableMenuOption: Locator;
+  readonly progressBarsSlidersMenuOption: Locator;
+  readonly alertsModalsmMenuOption: Locator;
+  readonly listBoxMenuOption: Locator;
+  readonly othersMenuOption: Locator;
 
-  /**
-   * Method to get the All examples menu option
-   */
-  getAllExamplesMenuOption() {
-    return this.page.locator("a", { hasText: "All Examples" });
-  }
+  constructor(page: Page) {
+    this.page = page;
 
-  /**
-   * Method to get the Input Form menu option
-   */
-  getInputFormMenuOption() {
-    return this.page.locator("a", { hasText: "Input Forms" });
-  }
-
-  /**
-   * Method to get the Date Pickers menu option
-   */
-  getDatePickersMenuOption() {
-    return this.page.locator("a", { hasText: "Date pickers" });
-  }
-
-  /**
-   * Method to get the Table menu option
-   */
-  getTableMenuOption() {
-    return this.page.locator("a", { hasText: "Table" });
-  }
-
-  /**
-   * Method to get the Progress Bars & Sliders menu option
-   */
-  getProgressBarsSlidersMenuOption() {
-    return this.page.locator("a", { hasText: "Progress Bars & Sliders" });
-  }
-
-  /**
-   * Method to get the Alerts & Modals menu option
-   */
-  getAlertsModalsmMenuOption() {
-    return this.page.locator("a", { hasText: "Alerts & Modals" });
-  }
-
-  /**
-   * Method to get the List Box menu option
-   */
-  getListBoxMenuOption() {
-    return this.page.locator("a", { hasText: "List Box" });
-  }
-
-  /**
-   * Method to get the Others menu option
-   */
-  getOthersMenuOption() {
-    return this.page.locator("a", { hasText: "Others" });
+    this.allExamplesMenuOption = this.page.locator("a", {
+      hasText: "All Examples",
+    });
+    this.inputFormMenuOption = this.page.locator("a", {
+      hasText: "Input Forms",
+    });
+    this.datePickersMenuOption = this.page.locator("a", {
+      hasText: "Date pickers",
+    });
+    this.tableMenuOption = this.page.locator("a", { hasText: "Table" });
+    this.progressBarsSlidersMenuOption = this.page.locator("a", {
+      hasText: "Progress Bars & Sliders",
+    });
+    this.alertsModalsmMenuOption = this.page.locator("a", {
+      hasText: "Alerts & Modals",
+    });
+    this.listBoxMenuOption = this.page.locator("a", { hasText: "List Box" });
+    this.othersMenuOption = this.page.locator("a", { hasText: "Others" });
   }
 }
 
