@@ -4,6 +4,7 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+    types: [opened, synchronize]
 jobs:
   test:
     timeout-minutes: 60
@@ -31,3 +32,5 @@ jobs:
         if: always()
         with:
           files: playwright-report/xray-report.xml
+      - name: Pull request summarizer
+        uses: KanHarI/gpt-commit-summarizer@v1.0.1
