@@ -14,10 +14,12 @@ export class JQueryDatePickerPage {
    * Method to check if the JQueryDatePickerPage is visible
    */
   async isReady() {
-    expect(this.page.url()).toEqual("");
+    expect(this.page.url()).toEqual(
+      "https://demo.seleniumeasy.com/jquery-date-picker-demo.html"
+    );
     await expect(
-      this.page.locator("", {
-        hasText: "",
+      this.page.locator("h2", {
+        hasText: "JQuery Date Picker Demo",
       })
     ).toBeVisible();
   }

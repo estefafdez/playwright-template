@@ -3,6 +3,35 @@ import { baseURL } from "../config/baseURL";
 import FooterElements from "../elements/FooterElements";
 import HeaderElements from "../elements/HeaderElements";
 import MenuElements from "../elements/MenuElements";
+import BootstrapAlertsPage from "./alertsandmodals/BootstrapAlertsPage";
+import BootstrapModalsPage from "./alertsandmodals/BootstrapModalsPage";
+import FileDownloadPage from "./alertsandmodals/FileDownloadPage";
+import JavascriptAlertsPage from "./alertsandmodals/JavascriptAlertsPage";
+import ProgressBarModalPage from "./alertsandmodals/ProgressBarModalPage";
+import WindowPopupModalPage from "./alertsandmodals/WindowPopupModalPage";
+import BootstrapDatePickerPage from "./datepickers/BootstrapDatePickerPage";
+import JQueryDatePickerPage from "./datepickers/JQueryDatePickerPage";
+import AjaxFormSubmitPage from "./inputforms/AjaxFormSubmitPage";
+import CheckboxDemoPage from "./inputforms/CheckboxDemoPage";
+import InputFormSubmitPage from "./inputforms/InputFormSubmitPage";
+import JQuerySelectDropdownPage from "./inputforms/JQuerySelectDropdownPage";
+import RadioButtonsDemoPage from "./inputforms/RadioButtonsDemoPage";
+import SelectDropdownListPage from "./inputforms/SelectDropdownListPage";
+import SimpleFormDemoPage from "./inputforms/SimpleFormDemoPage";
+import BootstrapListPage from "./listbox/BootstrapListPage";
+import DataListFilterPage from "./listbox/DataListFilterPage";
+import JQueryListBoxPage from "./listbox/JQueryListBoxPage";
+import ChartsDemoDropdownPage from "./others/ChartsDemoDropdownPage";
+import DragAndDropPage from "./others/DragAndDropPage";
+import DynamicDataLoadingPage from "./others/DynamicDataLoadingPage";
+import BootstrapProgressBarPage from "./progressbar/BootstrapProgressBarPage";
+import DragAndDropSlidersPage from "./progressbar/DragAndDropSlidersPage";
+import JQueryDownloadProgressBarsPage from "./progressbar/JQueryDownloadProgressBarsPage";
+import TableDataDownloadPage from "./table/TableDataDownloadPage";
+import TableDataSearchPage from "./table/TableDataSearchPage";
+import TableFilterPage from "./table/TableFilterPage";
+import TablePaginationPage from "./table/TablePaginationPage";
+import TableSortAndSearchPage from "./table/TableSortAndSearchPage";
 
 export class HomePage {
   footer: any;
@@ -138,7 +167,7 @@ export class HomePage {
     this.header.getInputForm().click();
     this.header.getSimpleFormDemo().click();
 
-    return new SimpleFormDemoPage();
+    return new SimpleFormDemoPage(this.page);
   }
 
   /**
@@ -148,7 +177,7 @@ export class HomePage {
     this.header.getInputForm().click();
     this.header.getCheckboxDemo().click();
 
-    return new CheckboxDemoPage();
+    return new CheckboxDemoPage(this.page);
   }
 
   /**
@@ -158,7 +187,7 @@ export class HomePage {
     this.header.getInputForm().click();
     this.header.getRadioButtonsDemo().click();
 
-    return new RadioButtonsDemoPage();
+    return new RadioButtonsDemoPage(this.page);
   }
 
   /**
@@ -168,7 +197,7 @@ export class HomePage {
     this.header.getInputForm().click();
     this.header.getSelectDropdownList().click();
 
-    return new SelectDropdownListPage();
+    return new SelectDropdownListPage(this.page);
   }
 
   /**
@@ -178,7 +207,7 @@ export class HomePage {
     this.header.getInputForm().click();
     this.header.getInputFormSubmit().click();
 
-    return new InputFormSubmitPage();
+    return new InputFormSubmitPage(this.page);
   }
 
   /**
@@ -188,7 +217,7 @@ export class HomePage {
     this.header.getInputForm().click();
     this.header.getAjaxFormSubmit().click();
 
-    return new AjaxFormSubmitPage();
+    return new AjaxFormSubmitPage(this.page);
   }
 
   /**
@@ -198,7 +227,7 @@ export class HomePage {
     this.header.getInputForm().click();
     this.header.getJQuerySelectDropdown().click();
 
-    return new JQuerySelectDropdownPage();
+    return new JQuerySelectDropdownPage(this.page);
   }
 
   /*--------------------------------------------------------------------* 
@@ -212,7 +241,7 @@ export class HomePage {
     this.header.getDatePickers().click();
     this.header.getBootstrapDatePicker().click();
 
-    return new BootstrapDatePickerPage();
+    return new BootstrapDatePickerPage(this.page);
   }
 
   /**
@@ -222,7 +251,7 @@ export class HomePage {
     this.header.getDatePickers().click();
     this.header.getJQueryDatePicker().click();
 
-    return new JQueryDatePickerPage();
+    return new JQueryDatePickerPage(this.page);
   }
 
   /*--------------------------------------------------------------------* 
@@ -236,7 +265,7 @@ export class HomePage {
     this.header.getTable().click();
     this.header.getTablePagination().click();
 
-    return new TablePaginationPage();
+    return new TablePaginationPage(this.page);
   }
 
   /**
@@ -246,7 +275,7 @@ export class HomePage {
     this.header.getTable().click();
     this.header.getTableDataSearch().click();
 
-    return new TableDataSearchPage();
+    return new TableDataSearchPage(this.page);
   }
 
   /**
@@ -256,7 +285,7 @@ export class HomePage {
     this.header.getTable().click();
     this.header.getTableFilter().click();
 
-    return new TableFilterPage();
+    return new TableFilterPage(this.page);
   }
 
   /**
@@ -266,7 +295,7 @@ export class HomePage {
     this.header.getTable().click();
     this.header.getTableSortAndSearch().click();
 
-    return new TableSortAndSearchPage();
+    return new TableSortAndSearchPage(this.page);
   }
 
   /**
@@ -276,7 +305,7 @@ export class HomePage {
     this.header.getTable().click();
     this.header.getTableDataDownload().click();
 
-    return new TableDataDownloadPage();
+    return new TableDataDownloadPage(this.page);
   }
 
   /*--------------------------------------------------------------------* 
@@ -301,7 +330,7 @@ export class HomePage {
     this.header.getProgressBar().click();
     this.header.getJQueryDownloadProgressBars().click();
 
-    return new JQueryDownloadProgressBarsPage();
+    return new JQueryDownloadProgressBarsPage(this.page);
   }
 
   /**
@@ -311,7 +340,7 @@ export class HomePage {
     this.header.getProgressBar().click();
     this.header.getBootstrapProgressBar().click();
 
-    return new BootstrapProgressBarPage();
+    return new BootstrapProgressBarPage(this.page);
   }
 
   /**
@@ -321,7 +350,7 @@ export class HomePage {
     this.header.getProgressBar().click();
     this.header.getDragAndDropSliders().click();
 
-    return new DragAndDropSlidersPage();
+    return new DragAndDropSlidersPage(this.page);
   }
 
   /*--------------------------------------------------------------------* 
@@ -335,7 +364,7 @@ export class HomePage {
     this.header.getAlertsAndModals().click();
     this.header.getBootstrapAlerts().click();
 
-    return new BootstrapAlertsPage();
+    return new BootstrapAlertsPage(this.page);
   }
 
   /**
@@ -345,7 +374,7 @@ export class HomePage {
     this.header.getAlertsAndModals().click();
     this.header.getBootstrapModals().click();
 
-    return new BootstrapModalsPage();
+    return new BootstrapModalsPage(this.page);
   }
 
   /**
@@ -355,7 +384,7 @@ export class HomePage {
     this.header.getAlertsAndModals().click();
     this.header.getWindowPopupModal().click();
 
-    return new WindowPopupModalPage();
+    return new WindowPopupModalPage(this.page);
   }
 
   /**
@@ -365,7 +394,7 @@ export class HomePage {
     this.header.getAlertsAndModals().click();
     this.header.getProgressBarModal().click();
 
-    return new ProgressBarModalPage();
+    return new ProgressBarModalPage(this.page);
   }
 
   /**
@@ -375,7 +404,7 @@ export class HomePage {
     this.header.getAlertsAndModals().click();
     this.header.getJavascriptAlerts().click();
 
-    return new JavascriptAlertsPage();
+    return new JavascriptAlertsPage(this.page);
   }
 
   /**
@@ -385,7 +414,7 @@ export class HomePage {
     this.header.getAlertsAndModals().click();
     this.header.getFileDownload().click();
 
-    return new FileDownloadPage();
+    return new FileDownloadPage(this.page);
   }
 
   /*--------------------------------------------------------------------* 
@@ -399,7 +428,7 @@ export class HomePage {
     this.header.getListBox().click();
     this.header.getBootstrapListBox().click();
 
-    return new BootstrapListPage();
+    return new BootstrapListPage(this.page);
   }
 
   /**
@@ -409,7 +438,7 @@ export class HomePage {
     this.header.getListBox().click();
     this.header.getJQueryListBox().click();
 
-    return new JQueryListBoxPage();
+    return new JQueryListBoxPage(this.page);
   }
 
   /**
@@ -419,7 +448,7 @@ export class HomePage {
     this.header.getListBox().click();
     this.header.getDataListFilter().click();
 
-    return new DataListFilterPage();
+    return new DataListFilterPage(this.page);
   }
 
   /*--------------------------------------------------------------------* 
@@ -433,7 +462,7 @@ export class HomePage {
     this.header.getOthers().click();
     this.header.getDragAndDrop().click();
 
-    return new DragAndDropPage();
+    return new DragAndDropPage(this.page);
   }
 
   /**
@@ -443,7 +472,7 @@ export class HomePage {
     this.header.getOthers().click();
     this.header.getDynamicDataLoading().click();
 
-    return new DynamicDataLoadingPage();
+    return new DynamicDataLoadingPage(this.page);
   }
 
   /**
@@ -453,7 +482,7 @@ export class HomePage {
     this.header.getOthers().click();
     this.header.getChartsDemo().click();
 
-    return new ChartsDemoDropdownPage();
+    return new ChartsDemoDropdownPage(this.page);
   }
 }
 

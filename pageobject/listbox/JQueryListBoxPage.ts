@@ -14,12 +14,10 @@ export class JQueryListBoxPage {
    * Method to check if the JQueryListBoxPage is visible
    */
   async isReady() {
-    expect(this.page.url()).toEqual(
-      "https://demo.seleniumeasy.com/generate-file-to-download-demo.html"
-    );
+    expect(this.page.url()).toEqual("");
     await expect(
-      this.page.locator("h2", {
-        hasText: "File Download Demo for Automation",
+      this.page.locator("", {
+        hasText: "",
       })
     ).toBeVisible();
   }

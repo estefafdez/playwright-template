@@ -14,10 +14,12 @@ export class InputFormSubmitPage {
    * Method to check if the InputFormSubmitPage is visible
    */
   async isReady() {
-    expect(this.page.url()).toEqual("");
+    expect(this.page.url()).toEqual(
+      "https://demo.seleniumeasy.com/input-form-demo.html"
+    );
     await expect(
-      this.page.locator("", {
-        hasText: "",
+      this.page.locator("h2", {
+        hasText: "Input form with validations",
       })
     ).toBeVisible();
   }
