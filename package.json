@@ -4,7 +4,7 @@
   "description": "Example of a project with Playwright, Typescript and some integrations.",
   "main": "index.js",
   "scripts": {
-    "open": "npx playwright open",
+    "open": "npx playwright open --trace on",
     "test": "npx playwright test",
     "debug": "npx playwright test --debug",
     "test:api": "npx playwright test --project=api",
@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/estefafdez/playwright-template#readme",
   "devDependencies": {
-    "@playwright/test": "^1.28.1",
-    "playwright": "^1.28.1"
+    "@playwright/test": "^1.29.1",
+    "playwright": "^1.29.1"
   },
   "dependencies": {
     "add-gpt-summarizer": "^0.0.6",
