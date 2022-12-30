@@ -4,7 +4,7 @@
   "description": "Example of a project with Playwright, Typescript and some integrations.",
   "main": "index.js",
   "scripts": {
-    "open": "npx playwright open --trace on",
+    "open": "npx playwright open",
     "test": "npx playwright test",
     "debug": "npx playwright test --debug",
     "test:api": "npx playwright test --project=api",
