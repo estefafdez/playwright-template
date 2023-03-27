@@ -6,6 +6,7 @@
   "scripts": {
     "open": "npx playwright open",
     "test": "npx playwright test",
+    "ui": "npx playwright test --ui",
     "debug": "npx playwright test --debug",
     "test:api": "npx playwright test --project=api",
     "test:web": "npx playwright test --project=web",
@@ -23,15 +24,15 @@
   },
   "homepage": "https://github.com/estefafdez/playwright-template#readme",
   "devDependencies": {
-    "@playwright/test": "^1.29.1",
-    "playwright": "^1.29.1"
+    "@playwright/test": "^1.32.1",
+    "playwright": "^1.32.1"
   },
   "dependencies": {
     "add-gpt-summarizer": "^0.0.6",
     "chalk": "5.2.0",
     "each-async": "^2.0.0",
     "indent-string": "^5.0.0",
-    "npm-check-updates": "^16.6.2",
+    "npm-check-updates": "^16.8.0",
     "playwright-qase-reporter": "1.1.3"
   }
 }
