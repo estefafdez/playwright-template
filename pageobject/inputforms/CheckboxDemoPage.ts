@@ -1,5 +1,5 @@
 import { expect, Page } from "@playwright/test";
-import CheckboxElements from "../../elements/inputForms/CheckboxElements";
+import CheckboxElements from "../../elements/inputForms/CheckBoxElements";
 
 export class CheckboxDemoPage {
   readonly page: Page;
