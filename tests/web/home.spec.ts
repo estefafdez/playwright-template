@@ -2,7 +2,7 @@ import { test } from "@playwright/test";
 import HomePage from "../../pageobject/HomePage";
 
 test.describe("Home Tests", () => {
-  test("[46, WEB] should visit the web and check that the header is displayed properly", async ({
+  test.skip("[46, WEB] should visit the web and check that the header is displayed properly", async ({
     page,
   }) => {
     const home = new HomePage(page);

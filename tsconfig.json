@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es5", "dom"],
+    "target": "es2015",
+    "lib": ["es2015", "dom"],
     "types": ["node"],
     "typeRoots": ["./node_modules/@types"],
     "skipLibCheck": true,
@@ -9,10 +9,14 @@
     "strict": true,
     "noImplicitAny": true,
     "strictPropertyInitialization": false,
-    "resolveJsonModule": true,
     "esModuleInterop": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "moduleResolution": "node"
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "typeRoots": ["./node_modules/@types"],
+  "paths": {
+    "@playwright/test": ["./node_modules/@playwright/test"]
+  }
 }
