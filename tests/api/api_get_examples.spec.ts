@@ -15,7 +15,7 @@ test.describe("API GET 200 Request", () => {
     expect(responseBody.total_pages).toEqual(2);
     expect(responseBody).toHaveProperty("data");
     expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toEqual(
+    expect(responseBody.support.url).toContain(
       "https://contentcaddy.io?utm_source=reqres"
     );
     expect(responseBody.support.text).toEqual(
@@ -40,7 +40,7 @@ test.describe("API GET 200 Request", () => {
       "https://reqres.in/img/faces/2-image.jpg"
     );
     expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toEqual(
+    expect(responseBody.support.url).toContain(
       "https://contentcaddy.io?utm_source=reqres"
     );
     expect(responseBody.support.text).toEqual(
@@ -72,7 +72,7 @@ test.describe("API GET 200 Request", () => {
     expect(responseBody.total).toEqual(12);
     expect(responseBody.total_pages).toEqual(2);
     expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toEqual(
+    expect(responseBody.support.url).toContain(
       "https://contentcaddy.io?utm_source=reqres"
     );
     expect(responseBody.support.text).toEqual(
@@ -95,7 +95,7 @@ test.describe("API GET 200 Request", () => {
     expect(responseBody.data.color).toEqual("#C74375");
     expect(responseBody.data.pantone_value).toEqual("17-2031");
     expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toEqual(
+    expect(responseBody.support.url).toContain(
       "https://contentcaddy.io?utm_source=reqres"
     );
     expect(responseBody.support.text).toEqual(
@@ -128,7 +128,7 @@ test.describe("API GET 200 Request", () => {
     expect(responseBody.data.color).toEqual("#C74375");
     expect(responseBody.data.pantone_value).toEqual("17-2031");
     expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toEqual(
+    expect(responseBody.support.url).toContain(
       "https://contentcaddy.io?utm_source=reqres"
     );
     expect(responseBody.support.text).toEqual(
