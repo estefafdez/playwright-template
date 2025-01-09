@@ -32,3 +32,16 @@ jobs:
         if: always()
         with:
           files: playwright-report/xray-report.xml
+
+      - name: Notify Slack
+        uses: slackapi/slack-github-action@v1.23.0
+        if: always()
+        with:
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          slack-message: |
+            Playwright tests have completed.
+            *Status:* ${{ job.status }}
+            *Branch:* ${{ github.ref }}
+            *Commit:* ${{ github.sha }}
+            env:
+                SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
