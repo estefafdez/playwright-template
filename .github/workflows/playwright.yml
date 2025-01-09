@@ -38,11 +38,8 @@ jobs:
         if: always()
         with:
           status: ${{ job.status }}
-          # channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
-          # slack-message: |
-          #   Playwright tests have completed.
-          #   *Status:* ${{ job.status }}
-          #   *Branch:* ${{ github.ref }}
-          #   *Commit:* ${{ github.sha }}
+          notification_title: "{workflow} has {status_message}"
+          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+          footer: "Linked Repo <{repo_url}|{repo}> | <{workflow_url}|View Workflow>"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
