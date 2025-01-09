@@ -34,14 +34,15 @@ jobs:
           files: playwright-report/xray-report.xml
 
       - name: Notify Slack
-        uses: slackapi/slack-github-action@v1.23.0
+        uses: ravsamhq/notify-slack-action@v1
         if: always()
         with:
-          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
-          slack-message: |
-            Playwright tests have completed.
-            *Status:* ${{ job.status }}
-            *Branch:* ${{ github.ref }}
-            *Commit:* ${{ github.sha }}
+          status: ${{ job.status }}
+          # channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          # slack-message: |
+          #   Playwright tests have completed.
+          #   *Status:* ${{ job.status }}
+          #   *Branch:* ${{ github.ref }}
+          #   *Commit:* ${{ github.sha }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
