@@ -44,4 +44,4 @@ jobs:
             *Branch:* ${{ github.ref }}
             *Commit:* ${{ github.sha }}
         env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
