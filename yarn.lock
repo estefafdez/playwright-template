@@ -3,25 +3,25 @@
 
 
 "@babel/runtime@^7.15.4":
-  version "7.26.9"
-  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.26.9.tgz"
-  integrity sha512-aA63XwOkcl4xxQa3HjPMqOP6LiK0ZDv3mUPYEFXkpHbaFjtGggE1A61FjFzJnB+p7/oy2gA8E+rcBNl/zC1tMg==
+  version "7.27.0"
+  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.27.0.tgz"
+  integrity sha512-VtPOkrdPHZsKc/clNqyi9WUA8TINkZ4cGk63UUE3u4pmB2k+ZMQRDuIOagv8UVd6j7k0T3+RRIb7beKTebNbcw==
   dependencies:
     regenerator-runtime "^0.14.0"
 
-"@playwright/test@^1.51.0", "@playwright/test@>=1.16.3":
-  version "1.51.0"
-  resolved "https://registry.npmjs.org/@playwright/test/-/test-1.51.0.tgz"
-  integrity sha512-dJ0dMbZeHhI+wb77+ljx/FeC8VBP6j/rj9OAojO08JI80wTZy6vRk9KvHKiDCUh4iMpEiseMgqRBIeW+eKX6RA==
+"@playwright/test@^1.52.0", "@playwright/test@>=1.16.3":
+  version "1.52.0"
+  resolved "https://registry.npmjs.org/@playwright/test/-/test-1.52.0.tgz"
+  integrity sha512-uh6W7sb55hl7D6vsAeA+V2p5JnlAqzhqFyF0VcJkKZXkgnFcVG9PziERRHQfPLfNGx1C292a4JqbWzhR8L4R1g==
   dependencies:
-    playwright "1.51.0"
+    playwright "1.52.0"
 
-"@types/node@^22.13.10":
-  version "22.13.10"
-  resolved "https://registry.npmjs.org/@types/node/-/node-22.13.10.tgz"
-  integrity sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==
+"@types/node@^22.15.3":
+  version "22.15.3"
+  resolved "https://registry.npmjs.org/@types/node/-/node-22.15.3.tgz"
+  integrity sha512-lX7HFZeHf4QG/J7tBZqrCAXwz9J5RD56Y6MpP0eJkka8p+K0RY/yBTW7CYFJ4VGCclxqOLKmiGP5juQc6MKgcw==
   dependencies:
-    undici-types "~6.20.0"
+    undici-types "~6.21.0"
 
 ajv@^8.0.0, ajv@^8.12.0:
   version "8.17.1"
@@ -65,12 +65,12 @@ axios-retry@^3.5.0:
     "@babel/runtime" "^7.15.4"
     is-retry-allowed "^2.2.0"
 
-axios@^0.28.0:
-  version "0.28.1"
-  resolved "https://registry.npmjs.org/axios/-/axios-0.28.1.tgz"
-  integrity sha512-iUcGA5a7p0mVb4Gm/sy+FSECNkPFT4y7wt6OM/CDpO/OnNCvSs3PoMG8ibrC9jRoGYU0gUK5pXVC4NPXq6lHRQ==
+axios@^1.8.2:
+  version "1.9.0"
+  resolved "https://registry.npmjs.org/axios/-/axios-1.9.0.tgz"
+  integrity sha512-re4CqKTJaURpzbLHtIi6XpDv20/CnpXOtjRY5/CU32L8gU8ek9UIivcfvSWvmKEngmVbrUtPpdDwWDWL7DNHvg==
   dependencies:
-    follow-redirects "^1.15.0"
+    follow-redirects "^1.15.6"
     form-data "^4.0.0"
     proxy-from-env "^1.1.0"
 
@@ -125,9 +125,9 @@ dotenv-expand@^10.0.0:
   integrity sha512-GopVGCpVS1UKH75VKHGuQFqS1Gusej0z4FyQkPdwjil2gNIv+LNsqBlboOzpJFZKVT95GkCyWJbBSdFEFUWI2A==
 
 dotenv@^16.0.0:
-  version "16.4.7"
-  resolved "https://registry.npmjs.org/dotenv/-/dotenv-16.4.7.tgz"
-  integrity sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==
+  version "16.5.0"
+  resolved "https://registry.npmjs.org/dotenv/-/dotenv-16.5.0.tgz"
+  integrity sha512-m/C+AwOAr9/W1UOIZUo232ejMNnJAJtYQjUbHoNTBNTJSvqzzDh7vnrei3o3r3m9blf6ZoDkvcw0VmozNRFJxg==
 
 dunder-proto@^1.0.1:
   version "1.0.1"
@@ -192,7 +192,7 @@ fast-uri@^3.0.1:
   resolved "https://registry.npmjs.org/fast-uri/-/fast-uri-3.0.6.tgz"
   integrity sha512-Atfo14OibSv5wAp4VWNsFYE1AchQRTv9cBGWET4pZWHzYshFSS9NQI6I57rdKn9croWVMbYFbLhJ+yJvmZIIHw==
 
-follow-redirects@^1.15.0:
+follow-redirects@^1.15.6:
   version "1.15.9"
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.9.tgz"
   integrity sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==
@@ -317,36 +317,36 @@ mime-types@^2.1.12, mime-types@^2.1.33:
   dependencies:
     mime-db "1.52.0"
 
-npm-check-updates@^17.1.15:
-  version "17.1.15"
-  resolved "https://registry.npmjs.org/npm-check-updates/-/npm-check-updates-17.1.15.tgz"
-  integrity sha512-miATvKu5rjec/1wxc5TGDjpsucgtCHwRVZorZpDkS6NzdWXfnUWlN4abZddWb7XSijAuBNzzYglIdTm9SbgMVg==
+npm-check-updates@^18.0.1:
+  version "18.0.1"
+  resolved "https://registry.npmjs.org/npm-check-updates/-/npm-check-updates-18.0.1.tgz"
+  integrity sha512-MO7mLp/8nm6kZNLLyPgz4gHmr9tLoU+pWPLdXuGAx+oZydBHkHWN0ibTonsrfwC2WEQNIQxuZagYwB67JQpAuw==
 
 onetime@^1.0.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/onetime/-/onetime-1.1.0.tgz"
   integrity sha512-GZ+g4jayMqzCRMgB2sol7GiCLjKfS1PINkjmx8spcKce1LiVqcbQreXwqs2YAFXC6R03VIG28ZS31t8M866v6A==
 
-playwright-core@1.51.0:
-  version "1.51.0"
-  resolved "https://registry.npmjs.org/playwright-core/-/playwright-core-1.51.0.tgz"
-  integrity sha512-x47yPE3Zwhlil7wlNU/iktF7t2r/URR3VLbH6EknJd/04Qc/PSJ0EY3CMXipmglLG+zyRxW6HNo2EGbKLHPWMg==
+playwright-core@1.52.0:
+  version "1.52.0"
+  resolved "https://registry.npmjs.org/playwright-core/-/playwright-core-1.52.0.tgz"
+  integrity sha512-l2osTgLXSMeuLZOML9qYODUQoPPnUsKsb5/P6LJ2e6uPKXUdPK5WYhN4z03G+YNbWmGDY4YENauNu4ZKczreHg==
 
-playwright-qase-reporter@2.0.17:
-  version "2.0.17"
-  resolved "https://registry.npmjs.org/playwright-qase-reporter/-/playwright-qase-reporter-2.0.17.tgz"
-  integrity sha512-BK2O39zQnC+BQzWZmZ7fkfNPRQbTW+Gn86flj2jbEYmhRPGHgGfDaT4EGBTsiwqHns5lTA3eAfMmgrlZNDnM7A==
+playwright-qase-reporter@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/playwright-qase-reporter/-/playwright-qase-reporter-2.1.0.tgz"
+  integrity sha512-/hX/TqZ8wwxaj73HOWgZn9LpiLTHCRRs61ns87QnpfBOiHtVeevv8rKHZq/Ud6871sOv1/7klbeVPXuDxi80aA==
   dependencies:
     chalk "^4.1.2"
-    qase-javascript-commons "~2.2.14"
+    qase-javascript-commons "~2.3.0"
     uuid "^9.0.0"
 
-playwright@^1.51.0, playwright@1.51.0:
-  version "1.51.0"
-  resolved "https://registry.npmjs.org/playwright/-/playwright-1.51.0.tgz"
-  integrity sha512-442pTfGM0xxfCYxuBa/Pu6B2OqxqqaYq39JS8QDMGThUvIOCd6s0ANDog3uwA0cHavVlnTQzGCN7Id2YekDSXA==
+playwright@^1.52.0, playwright@1.52.0:
+  version "1.52.0"
+  resolved "https://registry.npmjs.org/playwright/-/playwright-1.52.0.tgz"
+  integrity sha512-JAwMNMBlxJ2oD1kce4KPtMkDeKGHQstdpFPcPH3maElAXon/QZeTvtsfXmTMRyO9TslfoYOXkSsvao2nE1ilTw==
   dependencies:
-    playwright-core "1.51.0"
+    playwright-core "1.52.0"
   optionalDependencies:
     fsevents "2.3.2"
 
@@ -355,10 +355,26 @@ proxy-from-env@^1.1.0:
   resolved "https://registry.npmjs.org/proxy-from-env/-/proxy-from-env-1.1.0.tgz"
   integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
 
-qase-javascript-commons@~2.2.14:
-  version "2.2.14"
-  resolved "https://registry.npmjs.org/qase-javascript-commons/-/qase-javascript-commons-2.2.14.tgz"
-  integrity sha512-2Y4U3fNXmV0kDSVIt7yBOIaBsHzX8dm2soRUjzl2obuJ1pqvt4SkMTHlNKFyoE5VWuw/a3G/tSDlxWzmp/PHbA==
+qase-api-client@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/qase-api-client/-/qase-api-client-1.0.0.tgz"
+  integrity sha512-j9SgPUAaBWM9vL5yDxfJDkbFHMnWo/U1hMtrhEarQjYHhaUPuCvVD4vGNqZ0mZidW/wvtGSEB0YSJXTvplrVxA==
+  dependencies:
+    axios "^1.8.2"
+    axios-retry "^3.5.0"
+
+qase-api-v2-client@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/qase-api-v2-client/-/qase-api-v2-client-1.0.0.tgz"
+  integrity sha512-gSYMgb/pE3CCEWgkDu6ZSslr8YJNPWU6FxT/ivVyTNKIpPEmzs+447Gu1zOgqr7mKCSHNQMwQIXOqvxhgiVigA==
+  dependencies:
+    axios "^1.8.2"
+    axios-retry "^3.5.0"
+
+qase-javascript-commons@~2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmjs.org/qase-javascript-commons/-/qase-javascript-commons-2.3.0.tgz"
+  integrity sha512-LRx29O4OMXLq6w8USH/qiS8OosesfYl3ibYxCT3ulVZksd51sq5IQoqxaUSDSLYlM5T/+tKxVYqX9HsL2S1jVg==
   dependencies:
     ajv "^8.12.0"
     async-mutex "~0.5.0"
@@ -369,17 +385,10 @@ qase-javascript-commons@~2.2.14:
     lodash.merge "^4.6.2"
     lodash.mergewith "^4.6.2"
     mime-types "^2.1.33"
-    qaseio "~2.4.0"
+    qase-api-client "~1.0.0"
+    qase-api-v2-client "~1.0.0"
     strip-ansi "^6.0.1"
     uuid "^9.0.0"
-
-qaseio@~2.4.0:
-  version "2.4.1"
-  resolved "https://registry.npmjs.org/qaseio/-/qaseio-2.4.1.tgz"
-  integrity sha512-kpDi90S7z2NJb2RkrSmDxyLmQmgtLaqyeslTTcQsgoS7NAlPiOd0ECjkdyt3Vdum3i5qJhwLknIU4m848Qekdw==
-  dependencies:
-    axios "^0.28.0"
-    axios-retry "^3.5.0"
 
 regenerator-runtime@^0.14.0:
   version "0.14.1"
@@ -415,10 +424,10 @@ tslib@^2.4.0:
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
 
-undici-types@~6.20.0:
-  version "6.20.0"
-  resolved "https://registry.npmjs.org/undici-types/-/undici-types-6.20.0.tgz"
-  integrity sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==
+undici-types@~6.21.0:
+  version "6.21.0"
+  resolved "https://registry.npmjs.org/undici-types/-/undici-types-6.21.0.tgz"
+  integrity sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==
 
 uuid@^9.0.0:
   version "9.0.1"

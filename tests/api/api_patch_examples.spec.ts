@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.describe("API PATCH 200 Request", () => {
   test("[14, API] should get a 200 response after a PATCH request to update the user data", async ({
@@ -6,6 +6,9 @@ test.describe("API PATCH 200 Request", () => {
     baseURL,
   }) => {
     const response = await request.patch(`${baseURL}/api/users/2`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
       data: {
         body: {
           name: "morpheus",
