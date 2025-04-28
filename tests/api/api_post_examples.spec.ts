@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 const fs = require("fs");
 const userDataPath = `${__dirname}/../../data/users`;
@@ -19,6 +19,9 @@ test.describe("API POST 200 Request", () => {
     baseURL,
   }) => {
     const response = await request.post(`${baseURL}/api/users`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
       data: {
         body: {
           name: user1.name,
@@ -41,6 +44,9 @@ test.describe("API POST 200 Request", () => {
     baseURL,
   }) => {
     const response = await request.post(`${baseURL}/api/register`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
       data: {
         body: {
           email: user1.email,
@@ -60,6 +66,9 @@ test.describe("API POST 200 Request", () => {
     baseURL,
   }) => {
     const response = await request.post(`${baseURL}/api/register`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
       data: {
         body: {
           email: user3.email,
@@ -77,6 +86,9 @@ test.describe("API POST 200 Request", () => {
     baseURL,
   }) => {
     const response = await request.post(`${baseURL}/api/login`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
       data: {
         body: {
           email: user2.email,
@@ -96,6 +108,9 @@ test.describe("API POST 200 Request", () => {
     baseURL,
   }) => {
     const response = await request.post(`${baseURL}/api/login`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
       data: {
         body: {
           email: user4.email,

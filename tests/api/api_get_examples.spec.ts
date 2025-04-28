@@ -5,7 +5,11 @@ test.describe("API GET 200 Request", () => {
     request,
     baseURL,
   }) => {
-    const response = await request.get(`${baseURL}/api/users?page=2`);
+    const response = await request.get(`${baseURL}/api/users?page=2`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
+    });
     const responseBody = await response.json();
 
     expect(response.status()).toBe(200);
@@ -27,7 +31,11 @@ test.describe("API GET 200 Request", () => {
     request,
     baseURL,
   }) => {
-    const response = await request.get(`${baseURL}/api/users/2`);
+    const response = await request.get(`${baseURL}/api/users/2`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
+    });
     const responseBody = await response.json();
 
     expect(response.status()).toBe(200);
@@ -52,7 +60,11 @@ test.describe("API GET 200 Request", () => {
     request,
     baseURL,
   }) => {
-    const response = await request.get(`${baseURL}/api/users/23`);
+    const response = await request.get(`${baseURL}/api/users/23`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
+    });
     const responseBody = await response.json();
 
     expect(response.status()).toBe(404);
@@ -62,7 +74,11 @@ test.describe("API GET 200 Request", () => {
     request,
     baseURL,
   }) => {
-    const response = await request.get(`${baseURL}/api/unknown`);
+    const response = await request.get(`${baseURL}/api/unknown`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
+    });
     const responseBody = await response.json();
 
     expect(response.status()).toBe(200);
@@ -84,7 +100,11 @@ test.describe("API GET 200 Request", () => {
     request,
     baseURL,
   }) => {
-    const response = await request.get(`${baseURL}/api/unknown/2`);
+    const response = await request.get(`${baseURL}/api/unknown/2`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
+    });
     const responseBody = await response.json();
 
     expect(response.status()).toBe(200);
@@ -107,7 +127,11 @@ test.describe("API GET 200 Request", () => {
     request,
     baseURL,
   }) => {
-    const response = await request.get(`${baseURL}/api/unknown/23`);
+    const response = await request.get(`${baseURL}/api/unknown/23`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
+    });
     const responseBody = await response.json();
 
     expect(response.status()).toBe(404);
@@ -117,7 +141,11 @@ test.describe("API GET 200 Request", () => {
     request,
     baseURL,
   }) => {
-    const response = await request.get(`${baseURL}/api/unknown/2?delay=3`);
+    const response = await request.get(`${baseURL}/api/unknown/2?delay=3`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
+    });
     const responseBody = await response.json();
 
     expect(response.status()).toBe(200);

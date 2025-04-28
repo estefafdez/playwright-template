@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.describe("API PUT 200 Request", () => {
   test("[13, API] should get a 200 response after a PUT request to update the user data", async ({
@@ -6,6 +6,9 @@ test.describe("API PUT 200 Request", () => {
     baseURL,
   }) => {
     const response = await request.put(`${baseURL}/api/users/2`, {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
       data: {
         body: {
           name: "morpheus",
