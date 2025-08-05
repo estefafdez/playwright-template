@@ -52,13 +52,15 @@ const config: PlaywrightTestConfig = {
     ["junit", xrayOptions],
     ["list", { printSteps: true }],
   ],
+  /* Shared timeout for all tests. This is useful for long-running tests. */
+  globalTimeout: 15 * 15 * 1000, // 15 minutes
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     actionTimeout: 0,
-    trace: "on",
+    trace: "on-first-retry",
     screenshot: "only-on-failure",
+    headless: true, // Set to false if you want to see the browser during tests
   },
-
   /* Configure projects for major browsers */
   projects: [
     {
