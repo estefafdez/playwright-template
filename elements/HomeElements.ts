@@ -14,7 +14,7 @@ export class HomeElements {
     this.page = page;
     this.pageLogo = this.page.getByRole("img", { name: "QA Automation Labs" });
     this.homePageTitle = this.page.getByRole("heading", { name: "Tools Demo" });
-    this.navigationMenu = this.page.getByRole("navigation");
+    this.navigationMenu = this.page.getByRole("navigation").first();
     this.footerText = this.page.locator("footer");
     this.mainContent = this.page.getByRole("main");
     this.searchBox = this.page.getByRole("textbox", { name: /search/i });
