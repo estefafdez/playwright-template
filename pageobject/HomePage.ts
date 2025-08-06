@@ -4,7 +4,7 @@ import { HomeElements } from "../elements/HomeElements";
 
 export class HomePage {
   readonly page: Page;
-  homeElements: any;
+  homeElements: HomeElements;
 
   /**
    * Homepage constructor.
