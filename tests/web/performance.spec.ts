@@ -49,9 +49,12 @@ test.describe("Page Performance Tests", () => {
       await expect(homePage.homeElements.pageLogo).toBeVisible();
       await expect(homePage.homeElements.homePageTitle).toBeVisible();
 
-      await page.screenshot({
-        path: `test-results/responsive-${viewport.width}x${viewport.height}.png`,
+      const screenshot = await page.screenshot({
         fullPage: true,
+      });
+      await test.info().attach(`responsive-${viewport.width}x${viewport.height}.png`, {
+        body: screenshot,
+        contentType: 'image/png',
       });
     }
   });
