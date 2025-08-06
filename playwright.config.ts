@@ -53,7 +53,7 @@ const config: PlaywrightTestConfig = {
     ["list", { printSteps: true }],
   ],
   /* Shared timeout for all tests. This is useful for long-running tests. */
-  globalTimeout: 15 * 15 * 1000, // 15 minutes
+  globalTimeout: 15 * 60 * 1000, // 15 minutes
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     actionTimeout: 0,
