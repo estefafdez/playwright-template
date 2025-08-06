@@ -13,28 +13,24 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        shard: [1, 2]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npx playwright test --shard=${{ matrix.shard }}/2
+        run: npx playwright test
         env:
           CI: true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report-${{ matrix.shard }}
+          name: playwright-report
           path: playwright-report/
           retention-days: 30
       # Publish Test Results
@@ -43,8 +39,8 @@ jobs:
         if: always()
         with:
           files: playwright-report/xray-report.xml
-          check_name: 'Playwright Test Results'
-          comment_title: 'Playwright Test Results'
+          check_name: "Playwright Test Results"
+          comment_title: "Playwright Test Results"
 
       - name: Notify Slack
         uses: ravsamhq/notify-slack-action@v2
