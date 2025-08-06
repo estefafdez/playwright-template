@@ -1,7 +1,10 @@
 import { expect, test } from "@playwright/test";
 import { HomePage } from "../../pageobject/HomePage";
 
-const PAGE_LOAD_ACCEPTABLE_TIME_MS = 3000;
+// Acceptable page load time in ms, configurable via environment variable
+const PAGE_LOAD_ACCEPTABLE_TIME_MS = process.env.PAGE_LOAD_ACCEPTABLE_TIME_MS
+  ? parseInt(process.env.PAGE_LOAD_ACCEPTABLE_TIME_MS, 10)
+  : 3000;
 
 test.describe("Page Performance Tests", () => {
   test("should load page within acceptable time", async ({ page }) => {

@@ -17,7 +17,7 @@ export class NavigationElements {
     this.servicesLink = this.page.getByRole("link", { name: /services/i });
     this.contactLink = this.page.getByRole("link", { name: /contact/i });
     this.blogLink = this.page.getByRole("link", { name: /blog/i });
-    this.mobileMenuToggle = this.page.locator('button[class*="menu"], .hamburger, .mobile-menu-toggle').first();
+    this.mobileMenuToggle = this.page.getByTestId("mobile-menu-toggle");
     this.breadcrumb = this.page.getByRole("navigation", { name: /breadcrumb/i });
   }
 }
