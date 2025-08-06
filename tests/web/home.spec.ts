@@ -7,8 +7,8 @@ test.describe("Home Tests", () => {
     await homePage.navigate();
   });
 
-  test("should login with valid credentials", async ({ page }) => {
+  test("should check the Home Page Logo", async ({ page }) => {
     const homePage = new HomePage(page);
-    expect(await page.url()).toBe(test.info().project.use.baseURL);
+    expect(await homePage.homeElements.pageLogo.isVisible()).toBe(true);
   });
 });

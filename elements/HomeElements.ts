@@ -2,11 +2,11 @@ import { Locator, Page } from "@playwright/test";
 
 export class HomeElements {
   readonly page: Page;
-  readonly usernameField: Locator;
+  readonly pageLogo: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.usernameField = this.page.locator("#username");
+    this.pageLogo = this.page.locator("img[alt='QA Automation Labs']");
   }
 }
 
