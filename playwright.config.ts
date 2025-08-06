@@ -75,7 +75,7 @@ const config: PlaywrightTestConfig = {
       name: "web",
       testMatch: "web/**/*",
       use: {
-        baseURL: "https://demo.seleniumeasy.com",
+        baseURL: "https://testing.qaautomationlabs.com",
         ...devices["Desktop Chrome"],
       },
     },
