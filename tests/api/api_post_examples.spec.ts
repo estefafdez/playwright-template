@@ -1,125 +1,145 @@
 import { expect, test } from "@playwright/test";
+import { ApiHelpers, TEST_DATA } from "./helpers/api-helpers";
 
 const fs = require("fs");
 const userDataPath = `${__dirname}/../../data/users`;
 
-let user1Data = fs.readFileSync(`${userDataPath}/user1.json`, "utf8");
-let user2Data = fs.readFileSync(`${userDataPath}/user2.json`, "utf8");
-let user3Data = fs.readFileSync(`${userDataPath}/user3.json`, "utf8");
-let user4Data = fs.readFileSync(`${userDataPath}/user4.json`, "utf8");
+test.describe("API POST Requests - Create, Register & Login", () => {
+  let apiHelper: ApiHelpers;
+  let userData: any;
 
-const user1 = JSON.parse(user1Data);
-const user2 = JSON.parse(user2Data);
-const user3 = JSON.parse(user3Data);
-const user4 = JSON.parse(user4Data);
-
-test.describe("API POST 200 Request", () => {
-  test("[8, API] should get a 201 response after a POST request to create a new user", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.post(`${baseURL}/api/users`, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-      },
-      data: {
-        body: {
-          name: user1.name,
-          job: user1.job,
-        },
-      },
-    });
-
-    const responseBody = await response.json();
-
-    expect(response.status()).toBe(201);
-    expect(responseBody.body.name).toEqual("Estefania");
-    expect(responseBody.body.job).toEqual("QA Automation Engineer");
-    expect(responseBody).toHaveProperty("id");
-    expect(responseBody).toHaveProperty("createdAt");
+  test.beforeAll(async () => {
+    const user1Data = fs.readFileSync(`${userDataPath}/user1.json`, "utf8");
+    userData = JSON.parse(user1Data);
   });
 
-  test.skip("[9, API] should get a 200 response after a POST request to register a new user successfully", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.post(`${baseURL}/api/register`, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-      },
-      data: {
-        body: {
-          email: user1.email,
-          password: user1.password,
-        },
-      },
-    });
-
-    const responseBody = await response.json();
-    expect(response.status()).toBe(200);
-    expect(responseBody).toHaveProperty("id");
-    expect(responseBody).toHaveProperty("token");
+  test.beforeEach(async ({ request, baseURL }) => {
+    apiHelper = new ApiHelpers(request, baseURL || "https://reqres.in");
   });
 
-  test.skip("[10, API] should get a 400 response after a POST request to register a new user without a password set unsuccessfully", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.post(`${baseURL}/api/register`, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-      },
-      data: {
-        body: {
-          email: user3.email,
-        },
-      },
+  test("[10, API] should create new user with comprehensive validation", async () => {
+    const createUserData = {
+      name: userData.name,
+      job: userData.job,
+    };
+
+    const response = await apiHelper.makeRequest("POST", "/api/users", {
+      data: createUserData,
     });
 
-    const responseBody = await response.json();
-    expect(response.status()).toBe(400);
-    expect(responseBody.error).toEqual("Missing password");
+    expect(response.status).toBe(201);
+    apiHelper.validateResponseTime(response.responseTime);
+
+    expect(response.body).toHaveProperty("id");
+    expect(response.body).toHaveProperty("createdAt");
+    expect(response.body.name).toEqual(createUserData.name);
+    expect(response.body.job).toEqual(createUserData.job);
+
+    expect(response.body.createdAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
+
+    expect(typeof response.body.id).toBe("string");
+    expect(response.body.id.length).toBeGreaterThan(0);
   });
 
-  test.skip("[11, API] should get a 200 response after a POST request to login with a user successfully", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.post(`${baseURL}/api/login`, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-      },
-      data: {
-        body: {
-          email: user2.email,
-          password: user2.password,
-        },
-      },
+  test("[11, API] should create user with minimal data", async () => {
+    const minimalData = { name: "test user" };
+
+    const response = await apiHelper.makeRequest("POST", "/api/users", {
+      data: minimalData,
     });
 
-    const responseBody = await response.json();
-    expect(response.status()).toBe(200);
-    expect(responseBody).toHaveProperty("id");
-    expect(responseBody.token).toEqual("QpwL5tke4Pnpja7X4");
+    expect(response.status).toBe(201);
+    expect(response.body.name).toEqual(minimalData.name);
+    expect(response.body).toHaveProperty("id");
+    expect(response.body).toHaveProperty("createdAt");
   });
 
-  test.skip("[12, API] should get a 400 response after a POST request to login with a user without a password set unsuccessfully", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.post(`${baseURL}/api/login`, {
+  test("[12, API] should create user with special characters in data", async () => {
+    const specialData = {
+      name: "José María O'Connor",
+      job: "Senior QA Engineer & Test Automation Specialist",
+    };
+
+    const response = await apiHelper.makeRequest("POST", "/api/users", {
+      data: specialData,
+    });
+
+    expect(response.status).toBe(201);
+    expect(response.body.name).toEqual(specialData.name);
+    expect(response.body.job).toEqual(specialData.job);
+  });
+
+  test("[13, API] should register user successfully", async () => {
+    const response = await apiHelper.makeRequest("POST", "/api/register", {
+      data: TEST_DATA.users.validRegistration,
+    });
+
+    expect(response.status).toBe(200);
+    apiHelper.validateResponseTime(response.responseTime);
+
+    expect(response.body).toHaveProperty("id");
+    expect(response.body).toHaveProperty("token");
+    expect(typeof response.body.id).toBe("number");
+    expect(typeof response.body.token).toBe("string");
+    expect(response.body.token.length).toBeGreaterThan(10);
+  });
+
+  test("[14, API] should fail registration without password", async () => {
+    const response = await apiHelper.makeRequest("POST", "/api/register", {
+      data: TEST_DATA.users.invalidRegistration,
+    });
+
+    expect(response.status).toBe(400);
+    apiHelper.validateResponseTime(response.responseTime);
+
+    expect(response.body).toHaveProperty("error");
+    expect(response.body.error).toEqual("Missing password");
+  });
+
+  test("[15, API] should login user successfully", async () => {
+    const response = await apiHelper.makeRequest("POST", "/api/login", {
+      data: TEST_DATA.users.validLogin,
+    });
+
+    expect(response.status).toBe(200);
+    apiHelper.validateResponseTime(response.responseTime);
+
+    expect(response.body).toHaveProperty("token");
+    expect(response.body.token).toEqual("QpwL5tke4Pnpja7X4");
+  });
+
+  test("[16, API] should fail login without password", async () => {
+    const response = await apiHelper.makeRequest("POST", "/api/login", {
+      data: TEST_DATA.users.invalidLogin,
+    });
+
+    expect(response.status).toBe(400);
+    apiHelper.validateResponseTime(response.responseTime);
+
+    expect(response.body).toHaveProperty("error");
+    expect(response.body.error).toEqual("Missing password");
+  });
+
+  test("[17, API] should handle empty payload gracefully", async () => {
+    const response = await apiHelper.makeRequest("POST", "/api/users", {
+      data: {},
+    });
+
+    expect(response.status).toBe(201);
+    expect(response.body).toHaveProperty("id");
+    expect(response.body).toHaveProperty("createdAt");
+  });
+
+  test("[18, API] should validate request headers for POST operations", async () => {
+    const response = await apiHelper.makeRequest("POST", "/api/users", {
+      data: TEST_DATA.users.validUser,
       headers: {
-        "x-api-key": "reqres-free-v1",
-      },
-      data: {
-        body: {
-          email: user4.email,
-        },
+        "User-Agent": "Playwright-Test-Suite",
+        Accept: "application/json",
       },
     });
 
-    const responseBody = await response.json();
-    expect(response.status()).toBe(400);
-    expect(responseBody.error).toEqual("Missing password");
+    expect(response.status).toBe(201);
+    apiHelper.validateCommonHeaders(response.headers);
   });
 });
