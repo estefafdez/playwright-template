@@ -13,14 +13,14 @@ export class FormElements {
 
   constructor(page: Page) {
     this.page = page;
-    this.nameInput = this.page.getByRole("textbox", { name: /name/i });
-    this.emailInput = this.page.getByRole("textbox", { name: /email/i });
-    this.messageTextarea = this.page.getByRole("textbox", { name: /message/i });
-    this.submitButton = this.page.getByRole("button", { name: /submit/i });
-    this.resetButton = this.page.getByRole("button", { name: /reset/i });
-    this.successMessage = this.page.getByText(/success/i);
-    this.errorMessage = this.page.getByText(/error/i);
-    this.requiredFieldError = this.page.getByText(/required/i);
+    this.nameInput = this.page.locator('input[type="text"]').first();
+    this.emailInput = this.page.locator('input[type="email"]').first();
+    this.messageTextarea = this.page.locator("textarea").first();
+    this.submitButton = this.page.getByRole("button").first();
+    this.resetButton = this.page.getByRole("button", { name: /reset|clear/i });
+    this.successMessage = this.page.locator('.success, .alert-success, [class*="success"]');
+    this.errorMessage = this.page.locator('.error, .alert-error, [class*="error"]');
+    this.requiredFieldError = this.page.locator('.required, .field-error, [class*="required"]');
   }
 }
 

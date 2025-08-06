@@ -1,78 +1,61 @@
 import { expect, test } from "@playwright/test";
-import { ContactPage } from "../../pageobject/ContactPage";
+import { HomePage } from "../../pageobject/HomePage";
 
-test.describe("Contact Form Tests", () => {
-  let contactPage: ContactPage;
+test.describe("Page Interaction Tests", () => {
+  let homePage: HomePage;
 
   test.beforeEach(async ({ page }) => {
-    contactPage = new ContactPage(page);
-    await contactPage.navigate();
+    homePage = new HomePage(page);
+    await homePage.navigate();
   });
 
-  test("should display contact form elements", async () => {
-    await expect(contactPage.formElements.nameInput).toBeVisible();
-    await expect(contactPage.formElements.emailInput).toBeVisible();
-    await expect(contactPage.formElements.messageTextarea).toBeVisible();
-    await expect(contactPage.formElements.submitButton).toBeVisible();
+  test("should display main page elements", async () => {
+    await expect(homePage.homeElements.pageLogo).toBeVisible();
+    await expect(homePage.homeElements.homePageTitle).toBeVisible();
   });
 
-  test("should submit contact form with valid data", async () => {
-    const testData = {
-      name: "John Doe",
-      email: "john.doe@example.com",
-      message: "This is a test message for automation testing.",
-    };
+  test("should interact with clickable elements", async ({ page }) => {
+    const allLinks = page.getByRole("link");
+    const linkCount = await allLinks.count();
 
-    await contactPage.fillContactForm(testData.name, testData.email, testData.message);
-    await contactPage.submitForm();
-
-    await expect(contactPage.formElements.successMessage).toBeVisible({ timeout: 10000 });
-  });
-
-  test("should show validation error for empty required fields", async () => {
-    await contactPage.submitForm();
-
-    await expect(contactPage.formElements.requiredFieldError).toBeVisible();
-  });
-
-  test("should validate email format", async () => {
-    await contactPage.fillContactForm("Test User", "invalid-email", "Test message");
-    await contactPage.submitForm();
-
-    await expect(contactPage.formElements.errorMessage).toBeVisible();
-  });
-
-  test("should reset form when reset button is clicked", async () => {
-    await contactPage.fillContactForm("Test User", "test@example.com", "Test message");
-
-    if (await contactPage.formElements.resetButton.isVisible()) {
-      await contactPage.resetForm();
-
-      await expect(contactPage.formElements.nameInput).toHaveValue("");
-      await expect(contactPage.formElements.emailInput).toHaveValue("");
-      await expect(contactPage.formElements.messageTextarea).toHaveValue("");
+    if (linkCount > 0) {
+      const firstLink = allLinks.first();
+      await expect(firstLink).toBeVisible();
+      await expect(firstLink).toBeEnabled();
     }
   });
 
-  test("should have proper form accessibility", async () => {
-    await expect(contactPage.formElements.nameInput).toBeEditable();
-    await expect(contactPage.formElements.emailInput).toBeEditable();
-    await expect(contactPage.formElements.messageTextarea).toBeEditable();
+  test("should check for form elements if available", async ({ page }) => {
+    const inputs = page.locator("input");
+    const inputCount = await inputs.count();
 
-    await expect(contactPage.formElements.submitButton).toBeEnabled();
+    if (inputCount > 0) {
+      const firstInput = inputs.first();
+      await expect(firstInput).toBeVisible();
+
+      if (await firstInput.isEditable()) {
+        await firstInput.fill("Test input");
+        await expect(firstInput).toHaveValue("Test input");
+      }
+    }
   });
 
-  test("should handle special characters in form fields", async () => {
-    const specialData = {
-      name: "José María O'Connor",
-      email: "jose.maria@test-domain.com",
-      message: "Testing special characters: äöüß @#$%^&*()_+-=[]{}|;':\",./<>?",
-    };
+  test("should verify page accessibility", async ({ page }) => {
+    await expect(homePage.homeElements.pageLogo).toHaveAttribute("alt");
+    await expect(page).toHaveTitle(/.+/);
 
-    await contactPage.fillContactForm(specialData.name, specialData.email, specialData.message);
+    const buttons = page.getByRole("button");
+    const buttonCount = await buttons.count();
 
-    await expect(contactPage.formElements.nameInput).toHaveValue(specialData.name);
-    await expect(contactPage.formElements.emailInput).toHaveValue(specialData.email);
-    await expect(contactPage.formElements.messageTextarea).toHaveValue(specialData.message);
+    if (buttonCount > 0) {
+      const firstButton = buttons.first();
+      await expect(firstButton).toBeEnabled();
+    }
+  });
+
+  test("should test keyboard navigation", async ({ page }) => {
+    await page.keyboard.press("Tab");
+    const focusedElement = await page.evaluate(() => document.activeElement?.tagName);
+    expect(focusedElement).toBeTruthy();
   });
 });

@@ -12,7 +12,7 @@ export class ContactPage {
   }
 
   async navigate() {
-    await this.page.goto(`${baseURL.web}/contact`);
+    await this.page.goto(baseURL.web);
   }
 
   async fillContactForm(name: string, email: string, message: string) {

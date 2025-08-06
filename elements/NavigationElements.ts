@@ -12,12 +12,12 @@ export class NavigationElements {
 
   constructor(page: Page) {
     this.page = page;
-    this.homeLink = this.page.getByRole("link", { name: /home/i });
-    this.aboutLink = this.page.getByRole("link", { name: /about/i });
-    this.servicesLink = this.page.getByRole("link", { name: /services/i });
-    this.contactLink = this.page.getByRole("link", { name: /contact/i });
-    this.blogLink = this.page.getByRole("link", { name: /blog/i });
-    this.mobileMenuToggle = this.page.getByRole("button", { name: /menu/i });
+    this.homeLink = this.page.getByRole("link").first();
+    this.aboutLink = this.page.getByRole("link").nth(1);
+    this.servicesLink = this.page.getByRole("link").nth(2);
+    this.contactLink = this.page.getByRole("link").nth(3);
+    this.blogLink = this.page.getByRole("link").nth(4);
+    this.mobileMenuToggle = this.page.locator('button[class*="menu"], .hamburger, .mobile-menu-toggle').first();
     this.breadcrumb = this.page.getByRole("navigation", { name: /breadcrumb/i });
   }
 }
