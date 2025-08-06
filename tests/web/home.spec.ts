@@ -9,6 +9,6 @@ test.describe("Home Tests", () => {
 
   test("should check the Home Page Logo", async ({ page }) => {
     const homePage = new HomePage(page);
-    expect(await homePage.homeElements.pageLogo.isVisible()).toBe(true);
+    await expect(homePage.homeElements.pageLogo).toBeVisible();
   });
 });
