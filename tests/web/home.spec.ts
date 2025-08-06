@@ -9,6 +9,6 @@ test.describe("Home Tests", () => {
 
   test("should login with valid credentials", async ({ page }) => {
     const homePage = new HomePage(page);
-    expect(await page.url()).toBe("https://testing.qaautomationlabs.com");
+    expect(await page.url()).toBe(test.info().project.use.baseURL);
   });
 });
