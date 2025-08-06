@@ -101,7 +101,7 @@ test.describe("UI Components Tests", () => {
 
     await homePage.navigate();
 
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState('networkidle');
 
     const criticalErrors = errors.filter(
       (error) =>
