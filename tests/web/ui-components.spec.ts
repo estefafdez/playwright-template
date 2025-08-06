@@ -45,7 +45,8 @@ test.describe("UI Components Tests", () => {
 
   test("should handle hover interactions", async ({ page }) => {
     await homePage.homeElements.pageLogo.hover();
-    await page.waitForTimeout(500);
+    // Wait for a hover effect: e.g., a class or style change. Replace selector/property as appropriate.
+    // Example: await expect(homePage.homeElements.pageLogo).toHaveClass(/hover/);
     await expect(homePage.homeElements.pageLogo).toBeVisible();
   });
 
