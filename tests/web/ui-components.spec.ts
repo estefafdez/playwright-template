@@ -102,7 +102,7 @@ test.describe("UI Components Tests", () => {
 
     await homePage.navigate();
 
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('load');
 
     const criticalErrors = errors.filter(
       (error) =>
