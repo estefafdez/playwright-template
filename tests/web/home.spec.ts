@@ -7,8 +7,9 @@ test.describe("Home Tests", () => {
     await homePage.navigate();
   });
 
-  test("should check the Home Page Logo", async ({ page }) => {
+  test("should check the Home Page Logo and main title", async ({ page }) => {
     const homePage = new HomePage(page);
     await expect(homePage.homeElements.pageLogo).toBeVisible();
+    await expect(homePage.homeElements.homePageTitle).toBeVisible();
   });
 });
