@@ -13,7 +13,7 @@ export class FormElements {
 
   constructor(page: Page) {
     this.page = page;
-    this.nameInput = this.page.locator('input[type="text"]').first();
+    this.nameInput = this.page.getByLabel("Name");
     this.emailInput = this.page.locator('input[type="email"]').first();
     this.messageTextarea = this.page.locator("textarea").first();
     this.submitButton = this.page.getByRole("button").first();
