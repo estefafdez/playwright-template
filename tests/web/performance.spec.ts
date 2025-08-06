@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 import { HomePage } from "../../pageobject/HomePage";
 
+const PAGE_LOAD_ACCEPTABLE_TIME_MS = 3000;
+
 test.describe("Page Performance Tests", () => {
   test("should load page within acceptable time", async ({ page }) => {
     const startTime = Date.now();
@@ -54,7 +56,7 @@ test.describe("Page Performance Tests", () => {
       });
       await test.info().attach(`responsive-${viewport.width}x${viewport.height}.png`, {
         body: screenshot,
-        contentType: 'image/png',
+        contentType: "image/png",
       });
     }
   });
@@ -79,7 +81,10 @@ test.describe("Page Performance Tests", () => {
   });
 
   test("should handle network conditions gracefully", async ({ page }) => {
-    await page.route("**/*", (route) => route.continue({ delay: 100 }));
+    await page.route("**/*", async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      await route.continue();
+    });
 
     const homePage = new HomePage(page);
     await homePage.navigate();
