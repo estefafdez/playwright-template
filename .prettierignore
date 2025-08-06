@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+test-results/
+playwright-report/
+
+# Coverage reports
+coverage/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Lock files (keep original formatting)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Generated files
+*.d.ts
+
+# Ignore specific file types that shouldn't be formatted
+*.min.js
+*.min.css
