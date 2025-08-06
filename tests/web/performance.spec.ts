@@ -10,7 +10,7 @@ test.describe("Page Performance Tests", () => {
 
     const loadTime = Date.now() - startTime;
 
-    expect(loadTime).toBeLessThan(3000);
+    expect(loadTime).toBeLessThan(PAGE_LOAD_ACCEPTABLE_TIME_MS);
 
     await expect(homePage.homeElements.pageLogo).toBeVisible();
     await expect(homePage.homeElements.homePageTitle).toBeVisible();
