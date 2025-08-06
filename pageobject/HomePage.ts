@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test";
 import { baseURL } from "../config/baseURL";
-import LoginElements, { HomeElements } from "../elements/HomeElements";
+import { HomeElements } from "../elements/HomeElements";
 
 export class HomePage {
   readonly page: Page;
