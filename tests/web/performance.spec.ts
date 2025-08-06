@@ -76,9 +76,7 @@ test.describe("Page Performance Tests", () => {
   });
 
   test("should handle network conditions gracefully", async ({ page }) => {
-    await page.route("**/*", (route) => {
-      setTimeout(() => route.continue(), 100);
-    });
+    await page.route("**/*", (route) => route.continue({ delay: 100 }));
 
     const homePage = new HomePage(page);
     await homePage.navigate();
