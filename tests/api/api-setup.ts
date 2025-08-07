@@ -1,10 +1,10 @@
-import { test } from "@playwright/test";
+// Helper function to add delay between API tests to avoid 429 rate limiting
+export const addApiDelay = async (delayMs: number = 1000) => {
+  await new Promise((resolve) => setTimeout(resolve, delayMs));
+};
 
-// Global afterEach hook for all API tests to avoid 429 rate limiting
-// This setup will be automatically imported by all API test files
-test.afterEach(async () => {
-  // Add delay to avoid 429 rate limiting
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-});
+// Default delay for API tests
+export const DEFAULT_API_DELAY = 1000;
 
-export {};
+// Export delay function for easy import
+export default addApiDelay;
