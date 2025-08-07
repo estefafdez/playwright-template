@@ -1,12 +1,16 @@
 import { expect, test } from "@playwright/test";
 import { ApiHelpers } from "../../helpers/api-helpers";
-import "./api-setup";
+import { addApiDelay } from "./api-setup";
 
 test.describe("API Advanced Testing - Performance & Security", () => {
   let apiHelper: ApiHelpers;
 
   test.beforeEach(async ({ request, baseURL }) => {
     apiHelper = new ApiHelpers(request, baseURL || "https://reqres.in");
+  });
+
+  test.afterEach(async () => {
+    await addApiDelay(1500);
   });
 
   test.describe("Performance Tests", () => {
@@ -41,13 +45,8 @@ test.describe("API Advanced Testing - Performance & Security", () => {
       const responses = await Promise.all(requests);
 
       const successfulResponses = responses.filter((r) => r.status === 200);
-      const rateLimitedResponses = responses.filter((r) => r.status === 429);
 
       expect(successfulResponses.length).toBeGreaterThan(0);
-
-      rateLimitedResponses.forEach((response) => {
-        expect(response.status).toBe(429);
-      });
     });
 
     test("[39, API] should validate response times under load", async () => {
