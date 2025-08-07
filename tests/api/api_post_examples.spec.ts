@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { ApiHelpers, TEST_DATA } from "../../helpers/api-helpers";
-import "./api-setup";
+import { addApiDelay } from "./api-setup";
 
 const fs = require("fs");
 const userDataPath = `${__dirname}/../../data/users`;
@@ -16,6 +16,10 @@ test.describe("API POST Requests - Create, Register & Login", () => {
 
   test.beforeEach(async ({ request, baseURL }) => {
     apiHelper = new ApiHelpers(request, baseURL || "https://reqres.in");
+  });
+
+  test.afterEach(async () => {
+    await addApiDelay();
   });
 
   test("[10, API] should create new user with comprehensive validation", async () => {
