@@ -1,12 +1,16 @@
 import { expect, test } from "@playwright/test";
 import { ApiHelpers } from "../../helpers/api-helpers";
-import "./api-setup";
+import { addApiDelay } from "./api-setup";
 
 test.describe("API PATCH Requests - Partial Updates", () => {
   let apiHelper: ApiHelpers;
 
   test.beforeEach(async ({ request, baseURL }) => {
     apiHelper = new ApiHelpers(request, baseURL || "https://reqres.in");
+  });
+
+  test.afterEach(async () => {
+    await addApiDelay();
   });
 
   test("[25, API] should partially update user with PATCH request", async () => {

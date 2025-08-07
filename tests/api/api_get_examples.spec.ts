@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { ApiHelpers } from "../../helpers/api-helpers";
-import "./api-setup";
+import { addApiDelay } from "./api-setup";
 
 test.describe("API GET Requests - Users and Resources", () => {
   let apiHelper: ApiHelpers;
@@ -9,16 +9,16 @@ test.describe("API GET Requests - Users and Resources", () => {
     apiHelper = new ApiHelpers(request, baseURL || "https://reqres.in");
   });
 
+  test.afterEach(async () => {
+    await addApiDelay();
+  });
+
   test("[1, API] should get paginated users list with proper schema validation", async () => {
     const response = await apiHelper.makeRequest("GET", "/api/users", {
       params: { page: "2" },
     });
 
-    expect([200, 429]).toContain(response.status);
-
-    if (response.status === 429) {
-      return;
-    }
+    expect(response.status).toBe(200);
 
     apiHelper.validateResponseTime(response.responseTime);
     apiHelper.validateCommonHeaders(response.headers);
@@ -38,11 +38,7 @@ test.describe("API GET Requests - Users and Resources", () => {
     const userId = 2;
     const response = await apiHelper.makeRequest("GET", `/api/users/${userId}`);
 
-    expect([200, 429]).toContain(response.status);
-
-    if (response.status === 429) {
-      return;
-    }
+    expect(response.status).toBe(200);
 
     apiHelper.validateResponseTime(response.responseTime);
 
@@ -60,11 +56,7 @@ test.describe("API GET Requests - Users and Resources", () => {
   test("[3, API] should handle user not found with proper error response", async () => {
     const response = await apiHelper.makeRequest("GET", "/api/users/999");
 
-    expect([404, 429]).toContain(response.status);
-
-    if (response.status === 429) {
-      return;
-    }
+    expect(response.status).toBe(404);
 
     apiHelper.validateResponseTime(response.responseTime);
     expect(response.body).toEqual({});
@@ -73,11 +65,7 @@ test.describe("API GET Requests - Users and Resources", () => {
   test("[4, API] should get resources list with schema validation", async () => {
     const response = await apiHelper.makeRequest("GET", "/api/unknown");
 
-    expect([200, 429]).toContain(response.status);
-
-    if (response.status === 429) {
-      return;
-    }
+    expect(response.status).toBe(200);
 
     apiHelper.validateResponseTime(response.responseTime);
 
@@ -94,11 +82,7 @@ test.describe("API GET Requests - Users and Resources", () => {
     const resourceId = 2;
     const response = await apiHelper.makeRequest("GET", `/api/unknown/${resourceId}`);
 
-    expect([200, 429]).toContain(response.status);
-
-    if (response.status === 429) {
-      return;
-    }
+    expect(response.status).toBe(200);
 
     apiHelper.validateResponseTime(response.responseTime);
 
@@ -117,11 +101,7 @@ test.describe("API GET Requests - Users and Resources", () => {
   test("[6, API] should handle resource not found", async () => {
     const response = await apiHelper.makeRequest("GET", "/api/unknown/999");
 
-    expect([404, 429]).toContain(response.status);
-
-    if (response.status === 429) {
-      return;
-    }
+    expect(response.status).toBe(404);
 
     apiHelper.validateResponseTime(response.responseTime);
     expect(response.body).toEqual({});
@@ -132,11 +112,7 @@ test.describe("API GET Requests - Users and Resources", () => {
       params: { delay: "3" },
     });
 
-    expect([200, 429]).toContain(response.status);
-
-    if (response.status === 429) {
-      return;
-    }
+    expect(response.status).toBe(200);
 
     expect(response.responseTime).toBeGreaterThan(2900);
     expect(response.responseTime).toBeLessThan(10000);
@@ -149,11 +125,7 @@ test.describe("API GET Requests - Users and Resources", () => {
   test("[8, API] should validate response headers and content type", async () => {
     const response = await apiHelper.makeRequest("GET", "/api/users/1");
 
-    expect([200, 429]).toContain(response.status);
-
-    if (response.status === 429) {
-      return;
-    }
+    expect(response.status).toBe(200);
 
     apiHelper.validateCommonHeaders(response.headers);
 
@@ -170,7 +142,7 @@ test.describe("API GET Requests - Users and Resources", () => {
       params: { page: "1" },
     });
 
-    expect([200, 429]).toContain(firstPageResponse.status);
+    expect(firstPageResponse.status).toBe(200);
 
     if (firstPageResponse.status === 200) {
       expect(firstPageResponse.body.page).toEqual(1);
@@ -180,7 +152,7 @@ test.describe("API GET Requests - Users and Resources", () => {
       params: { page: "2" },
     });
 
-    expect([200, 429]).toContain(lastPageResponse.status);
+    expect(lastPageResponse.status).toBe(200);
 
     if (lastPageResponse.status === 200) {
       expect(lastPageResponse.body.page).toEqual(2);
@@ -190,7 +162,7 @@ test.describe("API GET Requests - Users and Resources", () => {
       params: { page: "100" },
     });
 
-    expect([200, 429]).toContain(invalidPageResponse.status);
+    expect(invalidPageResponse.status).toBe(200);
 
     if (invalidPageResponse.status === 200) {
       expect(invalidPageResponse.body.data).toEqual([]);
