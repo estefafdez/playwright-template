@@ -66,6 +66,7 @@ const config: PlaywrightTestConfig = {
     {
       name: "api",
       testMatch: "api/**/*",
+      testDir: "./tests/api",
       use: {
         baseURL: "https://reqres.in",
         ...devices["Desktop Chrome"],
@@ -74,6 +75,7 @@ const config: PlaywrightTestConfig = {
     {
       name: "web",
       testMatch: "web/**/*",
+      testDir: "./tests/web",
       use: {
         baseURL: "https://testing.qaautomationlabs.com",
         ...devices["Desktop Chrome"],
