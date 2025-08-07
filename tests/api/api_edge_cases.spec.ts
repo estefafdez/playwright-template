@@ -1,12 +1,16 @@
 import { expect, test } from "@playwright/test";
 import { ApiHelpers } from "../../helpers/api-helpers";
-import "./api-setup";
+import { addApiDelay } from "./api-setup";
 
 test.describe("API Edge Cases & Boundary Testing", () => {
   let apiHelper: ApiHelpers;
 
   test.beforeEach(async ({ request, baseURL }) => {
     apiHelper = new ApiHelpers(request, baseURL || "https://reqres.in");
+  });
+
+  test.afterEach(async () => {
+    await addApiDelay();
   });
 
   test.describe("Boundary Value Testing", () => {
@@ -23,17 +27,17 @@ test.describe("API Edge Cases & Boundary Testing", () => {
       expect(beyondMaxResponse.status).toBe(404);
 
       const zeroResponse = await apiHelper.makeRequest("GET", "/api/users/0");
-      expect([404, 400, 429]).toContain(zeroResponse.status);
+      expect([404, 400]).toContain(zeroResponse.status);
 
       const negativeResponse = await apiHelper.makeRequest("GET", "/api/users/-1");
-      expect([404, 400, 429]).toContain(negativeResponse.status);
+      expect([404, 400]).toContain(negativeResponse.status);
     });
 
     test("[49, API] should handle page boundary values", async () => {
       const firstPageResponse = await apiHelper.makeRequest("GET", "/api/users", {
         params: { page: "1" },
       });
-      expect([200, 429]).toContain(firstPageResponse.status);
+      expect(firstPageResponse.status).toBe(200);
       if (firstPageResponse.status === 200) {
         expect(firstPageResponse.body.page).toBe(1);
       }
@@ -41,7 +45,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
       const lastPageResponse = await apiHelper.makeRequest("GET", "/api/users", {
         params: { page: "2" },
       });
-      expect([200, 429]).toContain(lastPageResponse.status);
+      expect(lastPageResponse.status).toBe(200);
       if (lastPageResponse.status === 200) {
         expect(lastPageResponse.body.page).toBe(2);
       }
@@ -49,7 +53,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
       const beyondLastResponse = await apiHelper.makeRequest("GET", "/api/users", {
         params: { page: "100" },
       });
-      expect([200, 429]).toContain(beyondLastResponse.status);
+      expect(beyondLastResponse.status).toBe(200);
       if (beyondLastResponse.status === 200) {
         expect(beyondLastResponse.body.data).toEqual([]);
       }
@@ -57,12 +61,12 @@ test.describe("API Edge Cases & Boundary Testing", () => {
       const zeroPageResponse = await apiHelper.makeRequest("GET", "/api/users", {
         params: { page: "0" },
       });
-      expect([200, 429]).toContain(zeroPageResponse.status);
+      expect(zeroPageResponse.status).toBe(200);
 
       const negativePageResponse = await apiHelper.makeRequest("GET", "/api/users", {
         params: { page: "-1" },
       });
-      expect([200, 429]).toContain(negativePageResponse.status);
+      expect(negativePageResponse.status).toBe(200);
     });
   });
 
@@ -84,7 +88,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
           data: testData,
         });
 
-        expect([201, 400, 422, 429]).toContain(response.status);
+        expect([201, 400, 422]).toContain(response.status);
 
         if (response.status === 201) {
           expect(response.body).toHaveProperty("id");
@@ -128,7 +132,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
           data: testData,
         });
 
-        expect([201, 413, 422, 429]).toContain(response.status);
+        expect([201, 413, 422]).toContain(response.status);
       }
     });
   });
@@ -179,7 +183,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
         });
         const actualDelay = Date.now() - startTime;
 
-        expect([200, 429]).toContain(response.status);
+        expect(response.status).toBe(200);
 
         if (response.status === 200) {
           const expectedDelay = parseInt(delay) * 1000;
@@ -196,7 +200,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
       const responses = await Promise.all(requests);
 
       responses.forEach((response) => {
-        expect([200, 429]).toContain(response.status);
+        expect(response.status).toBe(200);
         if (response.status === 200) {
           expect(response.body.data.id).toBe(1);
         }
@@ -220,11 +224,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
         timeout: 5000,
       });
 
-      expect([201, 429]).toContain(createResponse.status);
-
-      if (createResponse.status === 429) {
-        return;
-      }
+      expect(createResponse.status).toBe(201);
 
       const userId = createResponse.body.id;
 
@@ -234,7 +234,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
         timeout: 5000,
       });
 
-      expect([200, 429]).toContain(putResponse.status);
+      expect(putResponse.status).toBe(200);
       if (putResponse.status === 200) {
         expect(putResponse.body.name).toBe(putData.name);
       }
@@ -245,7 +245,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
         timeout: 5000,
       });
 
-      expect([200, 429]).toContain(patchResponse.status);
+      expect(patchResponse.status).toBe(200);
       if (patchResponse.status === 200) {
         expect(patchResponse.body.job).toBe(patchData.job);
       }
@@ -253,7 +253,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
       const deleteResponse = await apiHelper.makeRequest("DELETE", `/api/users/${userId}`, {
         timeout: 5000,
       });
-      expect([204, 429]).toContain(deleteResponse.status);
+      expect(deleteResponse.status).toBe(204);
     });
 
     test("[59, API] should handle rapid successive operations", async () => {
@@ -267,7 +267,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
 
       for (const operation of operations) {
         const response = await operation();
-        expect([200, 201, 204, 429]).toContain(response.status);
+        expect([200, 201, 204]).toContain(response.status);
       }
     });
   });
