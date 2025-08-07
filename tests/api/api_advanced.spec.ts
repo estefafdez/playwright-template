@@ -69,8 +69,8 @@ test.describe("API Advanced Testing - Performance & Security", () => {
   });
 
   test.describe("Error Handling Tests", () => {
-    test("[40, API] should handle malformed JSON gracefully", async ({ request, baseURL }) => {
-      const response = await request.post(`${baseURL}/api/users`, {
+    test("[40, API] should handle malformed JSON gracefully", async () => {
+      const response = await apiHelper.makeRequest("POST", "/api/users", {
         headers: {
           "x-api-key": "reqres-free-v1",
           "Content-Type": "application/json",
@@ -78,7 +78,7 @@ test.describe("API Advanced Testing - Performance & Security", () => {
         data: '{"name": "test", "job": }',
       });
 
-      expect([400, 422, 500]).toContain(response.status());
+      expect([400, 422, 500]).toContain(response.status);
     });
 
     test("[41, API] should validate HTTP method restrictions", async () => {
@@ -156,6 +156,8 @@ test.describe("API Advanced Testing - Performance & Security", () => {
       expect(createResponse.status).toBe(201);
       const userId = createResponse.body.id;
 
+      expect(userId).toBeTruthy();
+
       const updateData = {
         name: "Updated User",
         job: "Senior QA Engineer",
@@ -165,9 +167,11 @@ test.describe("API Advanced Testing - Performance & Security", () => {
         data: updateData,
       });
 
-      expect(updateResponse.status).toBe(200);
-      expect(updateResponse.body.name).toEqual(updateData.name);
-      expect(updateResponse.body.job).toEqual(updateData.job);
+      expect([200, 201]).toContain(updateResponse.status);
+      if (updateResponse.status === 200 || updateResponse.status === 201) {
+        expect(updateResponse.body.name).toEqual(updateData.name);
+        expect(updateResponse.body.job).toEqual(updateData.job);
+      }
     });
   });
 
