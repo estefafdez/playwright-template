@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { ApiHelpers, TEST_DATA } from "../../helpers/api-helpers";
+import "./api-setup";
 
 test.describe("API PUT Requests - Update Operations", () => {
   let apiHelper: ApiHelpers;

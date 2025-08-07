@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { ApiHelpers, TEST_DATA } from "../../helpers/api-helpers";
+import "./api-setup";
 
 const fs = require("fs");
 const userDataPath = `${__dirname}/../../data/users`;
