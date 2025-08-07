@@ -1,4 +1,5 @@
 import { APIRequestContext, expect } from "@playwright/test";
+import { ApiRequestOptions } from "../types/apiRequestOptions";
 
 export interface ApiResponse {
   status: number;
@@ -16,15 +17,7 @@ export class ApiHelpers {
     this.baseURL = baseURL;
   }
 
-  async makeRequest(
-    method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE",
-    endpoint: string,
-    options?: {
-      data?: any;
-      headers?: Record<string, string>;
-      params?: Record<string, string>;
-    }
-  ): Promise<ApiResponse> {
+  async makeRequest(method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE", endpoint: string, options?: ApiRequestOptions): Promise<ApiResponse> {
     const startTime = Date.now();
 
     const defaultHeaders = {
@@ -42,6 +35,7 @@ export class ApiHelpers {
     const requestOptions = {
       headers: defaultHeaders,
       ...(options?.data && { data: options.data }),
+      ...(options?.timeout && { timeout: options.timeout }),
     };
 
     let response;

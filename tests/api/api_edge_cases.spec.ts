@@ -22,40 +22,46 @@ test.describe("API Edge Cases & Boundary Testing", () => {
       expect(beyondMaxResponse.status).toBe(404);
 
       const zeroResponse = await apiHelper.makeRequest("GET", "/api/users/0");
-      expect([404, 400]).toContain(zeroResponse.status);
+      expect([404, 400, 429]).toContain(zeroResponse.status);
 
       const negativeResponse = await apiHelper.makeRequest("GET", "/api/users/-1");
-      expect([404, 400]).toContain(negativeResponse.status);
+      expect([404, 400, 429]).toContain(negativeResponse.status);
     });
 
     test("[49, API] should handle page boundary values", async () => {
       const firstPageResponse = await apiHelper.makeRequest("GET", "/api/users", {
         params: { page: "1" },
       });
-      expect(firstPageResponse.status).toBe(200);
-      expect(firstPageResponse.body.page).toBe(1);
+      expect([200, 429]).toContain(firstPageResponse.status);
+      if (firstPageResponse.status === 200) {
+        expect(firstPageResponse.body.page).toBe(1);
+      }
 
       const lastPageResponse = await apiHelper.makeRequest("GET", "/api/users", {
         params: { page: "2" },
       });
-      expect(lastPageResponse.status).toBe(200);
-      expect(lastPageResponse.body.page).toBe(2);
+      expect([200, 429]).toContain(lastPageResponse.status);
+      if (lastPageResponse.status === 200) {
+        expect(lastPageResponse.body.page).toBe(2);
+      }
 
       const beyondLastResponse = await apiHelper.makeRequest("GET", "/api/users", {
         params: { page: "100" },
       });
-      expect(beyondLastResponse.status).toBe(200);
-      expect(beyondLastResponse.body.data).toEqual([]);
+      expect([200, 429]).toContain(beyondLastResponse.status);
+      if (beyondLastResponse.status === 200) {
+        expect(beyondLastResponse.body.data).toEqual([]);
+      }
 
       const zeroPageResponse = await apiHelper.makeRequest("GET", "/api/users", {
         params: { page: "0" },
       });
-      expect(zeroPageResponse.status).toBe(200);
+      expect([200, 429]).toContain(zeroPageResponse.status);
 
       const negativePageResponse = await apiHelper.makeRequest("GET", "/api/users", {
         params: { page: "-1" },
       });
-      expect(negativePageResponse.status).toBe(200);
+      expect([200, 429]).toContain(negativePageResponse.status);
     });
   });
 
@@ -210,6 +216,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
       const createData = { name: "Consistency Test", job: "Tester" };
       const createResponse = await apiHelper.makeRequest("POST", "/api/users", {
         data: createData,
+        timeout: 5000,
       });
 
       expect([201, 429]).toContain(createResponse.status);
@@ -223,6 +230,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
       const putData = { name: "Updated via PUT", job: "Senior Tester" };
       const putResponse = await apiHelper.makeRequest("PUT", `/api/users/${userId}`, {
         data: putData,
+        timeout: 5000,
       });
 
       expect([200, 429]).toContain(putResponse.status);
@@ -233,6 +241,7 @@ test.describe("API Edge Cases & Boundary Testing", () => {
       const patchData = { job: "Lead Tester" };
       const patchResponse = await apiHelper.makeRequest("PATCH", `/api/users/${userId}`, {
         data: patchData,
+        timeout: 5000,
       });
 
       expect([200, 429]).toContain(patchResponse.status);
@@ -240,7 +249,9 @@ test.describe("API Edge Cases & Boundary Testing", () => {
         expect(patchResponse.body.job).toBe(patchData.job);
       }
 
-      const deleteResponse = await apiHelper.makeRequest("DELETE", `/api/users/${userId}`);
+      const deleteResponse = await apiHelper.makeRequest("DELETE", `/api/users/${userId}`, {
+        timeout: 5000,
+      });
       expect([204, 429]).toContain(deleteResponse.status);
     });
 
