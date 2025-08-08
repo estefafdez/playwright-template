@@ -1,6 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { ApiHelpers, TEST_DATA } from "../../helpers/api-helpers";
-import { addApiDelay } from "./api-setup";
+import { ApiHelpers, TEST_DATA, addApiDelay } from "../../helpers/api-helpers";
 
 const fs = require("fs");
 const userDataPath = `${__dirname}/../../data/users`;

@@ -135,3 +135,8 @@ export const TEST_DATA = {
     validResource: { name: "cerulean", year: 2000, color: "#98B2D1", pantone_value: "15-4020" },
   },
 };
+
+// Helper function to add delay between API tests to avoid rate limiting
+export const addApiDelay = async (delayMs: number = 1000) => {
+  await new Promise((resolve) => setTimeout(resolve, delayMs));
+};

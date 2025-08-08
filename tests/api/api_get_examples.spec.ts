@@ -1,6 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { ApiHelpers } from "../../helpers/api-helpers";
-import { addApiDelay } from "./api-setup";
+import { ApiHelpers, addApiDelay } from "../../helpers/api-helpers";
 
 test.describe("API GET Requests - Users and Resources", () => {
   let apiHelper: ApiHelpers;
