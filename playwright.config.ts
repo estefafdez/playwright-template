@@ -51,6 +51,7 @@ const config: PlaywrightTestConfig = {
     ["html", { open: "on-failure" }],
     ["junit", xrayOptions],
     ["list", { printSteps: true }],
+    ["json", { outputFile: "playwright-report/results.json" }],
   ],
   /* Shared timeout for all tests. This is useful for long-running tests. */
   globalTimeout: 15 * 60 * 1000, // 15 minutes
