@@ -24,15 +24,15 @@
   },
   "homepage": "https://github.com/estefafdez/playwright-template#readme",
   "devDependencies": {
-    "@playwright/test": "^1.54.2",
-    "@types/node": "^24.2.0",
-    "playwright": "^1.54.2"
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^24.3.0",
+    "playwright": "^1.55.0"
   },
 "dependencies": {
-"chalk": "5.5.0",
+"chalk": "5.6.0",
     "each-async": "^2.0.0",
     "indent-string": "^5.0.0",
     "npm-check-updates": "^18.0.2",
-    "playwright-qase-reporter": "2.1.4"
+    "playwright-qase-reporter": "2.1.5"
   }
 }
