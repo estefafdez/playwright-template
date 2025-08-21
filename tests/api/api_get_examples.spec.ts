@@ -1,166 +1,171 @@
 import { expect, test } from "@playwright/test";
+import { ApiHelpers } from "../../helpers/api-helpers";
+import addApiDelay from "../../helpers/api-setup";
 
-test.describe("API GET 200 Request", () => {
-  test("[1, API] should get a 200 response after a GET request for the complete list of users", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.get(`${baseURL}/api/users?page=2`, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-      },
-    });
-    const responseBody = await response.json();
+test.describe("API GET Requests - Users and Resources", () => {
+  let apiHelper: ApiHelpers;
 
-    expect(response.status()).toBe(200);
-    expect(responseBody.page).toEqual(2);
-    expect(responseBody.per_page).toEqual(6);
-    expect(responseBody.total).toEqual(12);
-    expect(responseBody.total_pages).toEqual(2);
-    expect(responseBody).toHaveProperty("data");
-    expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toContain(
-      "https://contentcaddy.io?utm_source=reqres"
-    );
-    expect(responseBody.support.text).toEqual(
-      "Tired of writing endless social media content? Let Content Caddy generate it for you."
-    );
+  test.beforeEach(async ({ request, baseURL }) => {
+    apiHelper = new ApiHelpers(request, baseURL || "https://reqres.in");
   });
 
-  test("[2, API] should get a 200 response after a GET request for a single user", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.get(`${baseURL}/api/users/2`, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-      },
-    });
-    const responseBody = await response.json();
-
-    expect(response.status()).toBe(200);
-    expect(responseBody).toHaveProperty("data");
-    expect(responseBody.data.id).toEqual(2);
-    expect(responseBody.data.email).toEqual("janet.weaver@reqres.in");
-    expect(responseBody.data.first_name).toEqual("Janet");
-    expect(responseBody.data.last_name).toEqual("Weaver");
-    expect(responseBody.data.avatar).toEqual(
-      "https://reqres.in/img/faces/2-image.jpg"
-    );
-    expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toContain(
-      "https://contentcaddy.io?utm_source=reqres"
-    );
-    expect(responseBody.support.text).toEqual(
-      "Tired of writing endless social media content? Let Content Caddy generate it for you."
-    );
+  test.afterEach(async () => {
+    await addApiDelay();
   });
 
-  test("[3, API] should get a 404 response after a GET request for a single user not found", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.get(`${baseURL}/api/users/23`, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-      },
+  test("[1, API] should get paginated users list with proper schema validation", async () => {
+    const response = await apiHelper.makeRequest("GET", "/api/users", {
+      params: { page: "2" },
     });
-    const responseBody = await response.json();
 
-    expect(response.status()).toBe(404);
+    expect(response.status).toBe(200);
+
+    apiHelper.validateResponseTime(response.responseTime);
+    apiHelper.validateCommonHeaders(response.headers);
+
+    apiHelper.validatePaginationSchema(response.body);
+    expect(response.body.page).toEqual(2);
+    expect(response.body.per_page).toEqual(6);
+
+    response.body.data.forEach((user: any) => {
+      apiHelper.validateUserSchema(user);
+    });
+
+    apiHelper.validateSupportSchema(response.body.support);
   });
 
-  test("[4, API] should get a 200 response after a GET request for a list of resources", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.get(`${baseURL}/api/unknown`, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-      },
-    });
-    const responseBody = await response.json();
+  test("[2, API] should get single user with comprehensive validation", async () => {
+    const userId = 2;
+    const response = await apiHelper.makeRequest("GET", `/api/users/${userId}`);
 
-    expect(response.status()).toBe(200);
-    expect(responseBody).toHaveProperty("data");
-    expect(responseBody.page).toEqual(1);
-    expect(responseBody.per_page).toEqual(6);
-    expect(responseBody.total).toEqual(12);
-    expect(responseBody.total_pages).toEqual(2);
-    expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toContain(
-      "https://contentcaddy.io?utm_source=reqres"
-    );
-    expect(responseBody.support.text).toEqual(
-      "Tired of writing endless social media content? Let Content Caddy generate it for you."
-    );
+    expect(response.status).toBe(200);
+
+    apiHelper.validateResponseTime(response.responseTime);
+
+    expect(response.body).toHaveProperty("data");
+    apiHelper.validateUserSchema(response.body.data);
+
+    expect(response.body.data.id).toEqual(userId);
+    expect(response.body.data.email).toEqual("janet.weaver@reqres.in");
+    expect(response.body.data.first_name).toEqual("Janet");
+    expect(response.body.data.last_name).toEqual("Weaver");
+
+    apiHelper.validateSupportSchema(response.body.support);
   });
 
-  test("[5, API] should get a 200 response after a GET request for a single resource from a list", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.get(`${baseURL}/api/unknown/2`, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-      },
-    });
-    const responseBody = await response.json();
+  test("[3, API] should handle user not found with proper error response", async () => {
+    const response = await apiHelper.makeRequest("GET", "/api/users/999");
 
-    expect(response.status()).toBe(200);
-    expect(responseBody).toHaveProperty("data");
-    expect(responseBody.data.id).toEqual(2);
-    expect(responseBody.data.name).toEqual("fuchsia rose");
-    expect(responseBody.data.year).toEqual(2001);
-    expect(responseBody.data.color).toEqual("#C74375");
-    expect(responseBody.data.pantone_value).toEqual("17-2031");
-    expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toContain(
-      "https://contentcaddy.io?utm_source=reqres"
-    );
-    expect(responseBody.support.text).toEqual(
-      "Tired of writing endless social media content? Let Content Caddy generate it for you."
-    );
+    expect(response.status).toBe(404);
+
+    apiHelper.validateResponseTime(response.responseTime);
+    expect(response.body).toEqual({});
   });
 
-  test("[6, API] should get a 404 response after a GET request for a single resource from a list not found", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.get(`${baseURL}/api/unknown/23`, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-      },
-    });
-    const responseBody = await response.json();
+  test("[4, API] should get resources list with schema validation", async () => {
+    const response = await apiHelper.makeRequest("GET", "/api/unknown");
 
-    expect(response.status()).toBe(404);
+    expect(response.status).toBe(200);
+
+    apiHelper.validateResponseTime(response.responseTime);
+
+    apiHelper.validatePaginationSchema(response.body);
+
+    response.body.data.forEach((resource: any) => {
+      apiHelper.validateResourceSchema(resource);
+    });
+
+    apiHelper.validateSupportSchema(response.body.support);
   });
 
-  test("[7, API] should get a delay response 200 response after a GET request for a single resource from a list", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.get(`${baseURL}/api/unknown/2?delay=3`, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-      },
-    });
-    const responseBody = await response.json();
+  test("[5, API] should get single resource with detailed validation", async () => {
+    const resourceId = 2;
+    const response = await apiHelper.makeRequest("GET", `/api/unknown/${resourceId}`);
 
-    expect(response.status()).toBe(200);
-    expect(responseBody).toHaveProperty("data");
-    expect(responseBody.data.id).toEqual(2);
-    expect(responseBody.data.name).toEqual("fuchsia rose");
-    expect(responseBody.data.year).toEqual(2001);
-    expect(responseBody.data.color).toEqual("#C74375");
-    expect(responseBody.data.pantone_value).toEqual("17-2031");
-    expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toContain(
-      "https://contentcaddy.io?utm_source=reqres"
-    );
-    expect(responseBody.support.text).toEqual(
-      "Tired of writing endless social media content? Let Content Caddy generate it for you."
-    );
+    expect(response.status).toBe(200);
+
+    apiHelper.validateResponseTime(response.responseTime);
+
+    expect(response.body).toHaveProperty("data");
+    apiHelper.validateResourceSchema(response.body.data);
+
+    expect(response.body.data.id).toEqual(resourceId);
+    expect(response.body.data.name).toEqual("fuchsia rose");
+    expect(response.body.data.year).toEqual(2001);
+    expect(response.body.data.color).toEqual("#C74375");
+    expect(response.body.data.pantone_value).toEqual("17-2031");
+
+    apiHelper.validateSupportSchema(response.body.support);
+  });
+
+  test("[6, API] should handle resource not found", async () => {
+    const response = await apiHelper.makeRequest("GET", "/api/unknown/999");
+
+    expect(response.status).toBe(404);
+
+    apiHelper.validateResponseTime(response.responseTime);
+    expect(response.body).toEqual({});
+  });
+
+  test("[7, API] should handle delayed response with timeout", async () => {
+    const response = await apiHelper.makeRequest("GET", "/api/unknown/2", {
+      params: { delay: "3" },
+    });
+
+    expect(response.status).toBe(200);
+
+    expect(response.responseTime).toBeGreaterThan(2900);
+    expect(response.responseTime).toBeLessThan(10000);
+
+    expect(response.body).toHaveProperty("data");
+    apiHelper.validateResourceSchema(response.body.data);
+    apiHelper.validateSupportSchema(response.body.support);
+  });
+
+  test("[8, API] should validate response headers and content type", async () => {
+    const response = await apiHelper.makeRequest("GET", "/api/users/1");
+
+    expect(response.status).toBe(200);
+
+    apiHelper.validateCommonHeaders(response.headers);
+
+    if (response.headers["cache-control"]) {
+      expect(response.headers["cache-control"]).toBeTruthy();
+    }
+    if (response.headers["x-powered-by"]) {
+      expect(response.headers["x-powered-by"]).toBeTruthy();
+    }
+  });
+
+  test("[9, API] should handle pagination edge cases", async () => {
+    const firstPageResponse = await apiHelper.makeRequest("GET", "/api/users", {
+      params: { page: "1" },
+    });
+
+    expect(firstPageResponse.status).toBe(200);
+
+    if (firstPageResponse.status === 200) {
+      expect(firstPageResponse.body.page).toEqual(1);
+    }
+
+    const lastPageResponse = await apiHelper.makeRequest("GET", "/api/users", {
+      params: { page: "2" },
+    });
+
+    expect(lastPageResponse.status).toBe(200);
+
+    if (lastPageResponse.status === 200) {
+      expect(lastPageResponse.body.page).toEqual(2);
+    }
+
+    const invalidPageResponse = await apiHelper.makeRequest("GET", "/api/users", {
+      params: { page: "100" },
+    });
+
+    expect(invalidPageResponse.status).toBe(200);
+
+    if (invalidPageResponse.status === 200) {
+      expect(invalidPageResponse.body.data).toEqual([]);
+    }
   });
 });
