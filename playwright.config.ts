@@ -44,7 +44,7 @@ const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 1,
-  /* Opt out of parallel tests on CI. */
+  /* Opt out of parallel tests on CI. Undefined means that pw will take care of it */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
@@ -53,18 +53,21 @@ const config: PlaywrightTestConfig = {
     ["list", { printSteps: true }],
     ["json", { outputFile: "playwright-report/results.json" }],
   ],
+  /* Shared timeout for all tests. This is useful for long-running tests. */
+  globalTimeout: 15 * 60 * 1000, // 15 minutes
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     actionTimeout: 0,
-    trace: "on",
+    trace: "on-first-retry",
     screenshot: "only-on-failure",
+    headless: true, // Set to false if you want to see the browser during tests
   },
-
   /* Configure projects for major browsers */
   projects: [
     {
       name: "api",
       testMatch: "api/**/*",
+      testDir: "./tests/api",
       use: {
         baseURL: "https://reqres.in",
         ...devices["Desktop Chrome"],
@@ -73,8 +76,9 @@ const config: PlaywrightTestConfig = {
     {
       name: "web",
       testMatch: "web/**/*",
+      testDir: "./tests/web",
       use: {
-        baseURL: "https://demo.seleniumeasy.com",
+        baseURL: "https://testing.qaautomationlabs.com",
         ...devices["Desktop Chrome"],
       },
     },

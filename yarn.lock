@@ -9,10 +9,10 @@
   dependencies:
     playwright "1.55.0"
 
-"@types/node@^24.3.0":
-  version "24.3.0"
-  resolved "https://registry.npmjs.org/@types/node/-/node-24.3.0.tgz"
-  integrity sha512-aPTXCrfwnDLj4VvXrm+UUCQjNEvJgNA8s5F1cvwQU+3KNltTOkBm1j30uNLyqqPNe7gE3KFzImYoZEfLhp4Yow==
+"@types/node@^24.3.1":
+  version "24.3.1"
+  resolved "https://registry.npmjs.org/@types/node/-/node-24.3.1.tgz"
+  integrity sha512-3vXmQDXy+woz+gnrTvuvNrPzekOi+Ds0ReMxw0LzBiK3a+1k0kQn9f2NWk+lgD4rJehFUmYy2gMhJ2ZI+7YP9g==
   dependencies:
     undici-types "~7.10.0"
 
@@ -58,9 +58,9 @@ axios-retry@^4.5.0:
     is-retry-allowed "^2.2.0"
 
 axios@^1.8.2, "axios@0.x || 1.x":
-  version "1.11.0"
-  resolved "https://registry.npmjs.org/axios/-/axios-1.11.0.tgz"
-  integrity sha512-1Lx3WLFQWm3ooKDYZD1eXmoGO9fxYQjrycfHFC8P0sCfQVXyROp0p9PFWBehewBOdCwHc+f/b8I0fMto5eSfwA==
+  version "1.12.0"
+  resolved "https://registry.npmjs.org/axios/-/axios-1.12.0.tgz"
+  integrity sha512-oXTDccv8PcfjZmPGlWsPSwtOJCZ/b6W5jAMCNcfwJbCzDckwG0jrYJFaWH1yvivfCXjVzV/SPDEhMB3Q+DSurg==
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.4"
@@ -82,10 +82,10 @@ chalk@^4.1.2:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@5.6.0:
-  version "5.6.0"
-  resolved "https://registry.npmjs.org/chalk/-/chalk-5.6.0.tgz"
-  integrity sha512-46QrSQFyVSEyYAgQ22hQ+zDa60YHA4fBstHmtSApj1Y5vKtG27fWowW03jCk5KcbXEWPZUIR894aARCA/G1kfQ==
+chalk@5.6.2:
+  version "5.6.2"
+  resolved "https://registry.npmjs.org/chalk/-/chalk-5.6.2.tgz"
+  integrity sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA==
 
 color-convert@^2.0.1:
   version "2.0.1"
@@ -180,9 +180,9 @@ fast-deep-equal@^3.1.3:
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
 
 fast-uri@^3.0.1:
-  version "3.0.6"
-  resolved "https://registry.npmjs.org/fast-uri/-/fast-uri-3.0.6.tgz"
-  integrity sha512-Atfo14OibSv5wAp4VWNsFYE1AchQRTv9cBGWET4pZWHzYshFSS9NQI6I57rdKn9croWVMbYFbLhJ+yJvmZIIHw==
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/fast-uri/-/fast-uri-3.1.0.tgz"
+  integrity sha512-iPeeDKJSWf4IEOasVVrknXpaBV0IApz/gp7S2bb7Z4Lljbl2MGJRqInZiUrQwV16cpzw/D3S5j5Julj/gT52AA==
 
 follow-redirects@^1.15.6:
   version "1.15.11"
@@ -305,10 +305,10 @@ mime-types@^2.1.12, mime-types@^2.1.33:
   dependencies:
     mime-db "1.52.0"
 
-npm-check-updates@^18.0.2:
-  version "18.0.2"
-  resolved "https://registry.npmjs.org/npm-check-updates/-/npm-check-updates-18.0.2.tgz"
-  integrity sha512-9uVFZUCg5oDOcbzdsrJ4BEvq2gikd23tXuF5mqpl4mxVl051lzB00Xmd7ZVjVWY3XNUF3BQKWlN/qmyD8/bwrA==
+npm-check-updates@^18.1.1:
+  version "18.1.1"
+  resolved "https://registry.npmjs.org/npm-check-updates/-/npm-check-updates-18.1.1.tgz"
+  integrity sha512-sr+z5tEZop9n+uxAv/FVbpIdrayfG3Dr/D91igb+GyBl9eiudYUfGUZEBsmHq6kMOGEssSM3YWrP3njQjVU4Gw==
 
 onetime@^1.0.0:
   version "1.1.0"
@@ -320,13 +320,13 @@ playwright-core@1.55.0:
   resolved "https://registry.npmjs.org/playwright-core/-/playwright-core-1.55.0.tgz"
   integrity sha512-GvZs4vU3U5ro2nZpeiwyb0zuFaqb9sUiAJuyrWpcGouD8y9/HLgGbNRjIph7zU9D3hnPaisMl9zG9CgFi/biIg==
 
-playwright-qase-reporter@2.1.5:
-  version "2.1.5"
-  resolved "https://registry.npmjs.org/playwright-qase-reporter/-/playwright-qase-reporter-2.1.5.tgz"
-  integrity sha512-5WsZ+Lca03hxVY8xIIVyFd8w0z+nMTrnBp9po+3v2UAbf5d9wGQPqbELPtV3/1DfxlTiOzWy5Q4VWgJ0X/vouA==
+playwright-qase-reporter@2.1.6:
+  version "2.1.6"
+  resolved "https://registry.npmjs.org/playwright-qase-reporter/-/playwright-qase-reporter-2.1.6.tgz"
+  integrity sha512-tlQ1VYuhrOFwrQhSKMFttu/cAgktooc29vFeClnhV235D0ErTSrApw1lrf942457wydvKEsl6ztIUegjsMWppQ==
   dependencies:
     chalk "^4.1.2"
-    qase-javascript-commons "~2.4.1"
+    qase-javascript-commons "~2.4.2"
     uuid "^9.0.0"
 
 playwright@^1.55.0, playwright@1.55.0:
@@ -359,10 +359,10 @@ qase-api-v2-client@~1.0.1:
     axios "^1.8.2"
     axios-retry "^4.5.0"
 
-qase-javascript-commons@~2.4.1:
-  version "2.4.1"
-  resolved "https://registry.npmjs.org/qase-javascript-commons/-/qase-javascript-commons-2.4.1.tgz"
-  integrity sha512-B/aYqeyGLH6OGe/93pXpDlALm/W6+5NSv//wsDk3MOlKm1JzaXZ2ADyvtVRvGfiTav2tv6jPS8tTXu7LOk/dXA==
+qase-javascript-commons@~2.4.2:
+  version "2.4.2"
+  resolved "https://registry.npmjs.org/qase-javascript-commons/-/qase-javascript-commons-2.4.2.tgz"
+  integrity sha512-Ys8WZ1pX9YDpulDDjERzqYBdHCFIsZ1fBXJaZ2q048J4q4gtzGhzhiSdGqCibTQjZXiksIj2BLEkO1N5mjItwg==
   dependencies:
     ajv "^8.12.0"
     async-mutex "~0.5.0"
