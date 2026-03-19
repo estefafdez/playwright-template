@@ -78,6 +78,14 @@ const config: PlaywrightTestConfig = {
         ...devices["Desktop Chrome"],
       },
     },
+    {
+      name: "meetup",
+      testMatch: "meetup/**/*",
+      use: {
+        baseURL: "https://demo.playwright.dev/todomvc",
+        ...devices["Desktop Chrome"],
+      },
+    },
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */

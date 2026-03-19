@@ -10,6 +10,7 @@
     "debug": "npx playwright test --debug",
     "test:api": "npx playwright test --project=api",
     "test:web": "npx playwright test --project=web",
+    "test:meetup": "npx playwright test --project=meetup",
     "report": "npx playwright show-report"
   },
   "repository": {
