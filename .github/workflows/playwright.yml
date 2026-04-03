@@ -39,7 +39,7 @@ jobs:
       - name: Testdino Reporter
         run: npx --yes tdpw upload playwright-report/ --upload-html
         env:
-          TDPW_API_KEY: ${{ secrets.TESTDINO_API }}
+          TESTDINO_TOKEN: ${{ secrets.TDPW_API_KEY }}
 
       - name: Notify Slack
         uses: ravsamhq/notify-slack-action@v2
