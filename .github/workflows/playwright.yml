@@ -37,8 +37,7 @@ jobs:
           check_name: "Playwright Test Results"
           comment_title: "Playwright Test Results"
       - name: Testdino Reporter
-        run:
-          npx --yes tdpw upload playwright-report/ --token="${TDPW_API_KEY}" --upload-html
+        run: npx --yes tdpw upload playwright-report/ --upload-html
         env:
           TDPW_API_KEY: ${{ secrets.TESTDINO_API }}
 
