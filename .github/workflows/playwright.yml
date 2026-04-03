@@ -36,8 +36,11 @@ jobs:
           files: playwright-report/xray-report.xml
           check_name: "Playwright Test Results"
           comment_title: "Playwright Test Results"
+          
       - name: Testdino Reporter
-        run: npx --yes tdpw upload playwright-report/ --token="${TESTDINO_TOKEN}" --upload-html --verbose
+        if: always()
+        run:
+          npx --yes tdpw playwright-report/ --token="${TDPW_API_KEY}" --upload-html
         env:
           TESTDINO_TOKEN: ${{ secrets.TDPW_API_KEY }}
 
