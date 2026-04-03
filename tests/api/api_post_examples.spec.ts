@@ -20,7 +20,7 @@ test.describe("API POST 200 Request", () => {
   }) => {
     const response = await request.post(`${baseURL}/api/users`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
       data: {
         body: {
@@ -45,7 +45,7 @@ test.describe("API POST 200 Request", () => {
   }) => {
     const response = await request.post(`${baseURL}/api/register`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
       data: {
         body: {
@@ -67,7 +67,7 @@ test.describe("API POST 200 Request", () => {
   }) => {
     const response = await request.post(`${baseURL}/api/register`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
       data: {
         body: {
@@ -87,7 +87,7 @@ test.describe("API POST 200 Request", () => {
   }) => {
     const response = await request.post(`${baseURL}/api/login`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
       data: {
         body: {
@@ -109,7 +109,7 @@ test.describe("API POST 200 Request", () => {
   }) => {
     const response = await request.post(`${baseURL}/api/login`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
       data: {
         body: {

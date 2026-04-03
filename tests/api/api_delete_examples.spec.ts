@@ -7,7 +7,7 @@ test.describe("API DELETE 200 Request", () => {
   }) => {
     const response = await request.delete(`${baseURL}/api/users/2`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
     });
     expect(response.status()).toBe(204);

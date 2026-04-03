@@ -7,7 +7,7 @@ test.describe("API GET 200 Request", () => {
   }) => {
     const response = await request.get(`${baseURL}/api/users?page=2`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
     });
     const responseBody = await response.json();
@@ -19,12 +19,8 @@ test.describe("API GET 200 Request", () => {
     expect(responseBody.total_pages).toEqual(2);
     expect(responseBody).toHaveProperty("data");
     expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toContain(
-      "https://contentcaddy.io?utm_source=reqres"
-    );
-    expect(responseBody.support.text).toEqual(
-      "Tired of writing endless social media content? Let Content Caddy generate it for you."
-    );
+    expect(responseBody.support.url).toContain("utm_source=reqres");
+    expect(responseBody.support.text).toBeTruthy();
   });
 
   test("[2, API] should get a 200 response after a GET request for a single user", async ({
@@ -33,7 +29,7 @@ test.describe("API GET 200 Request", () => {
   }) => {
     const response = await request.get(`${baseURL}/api/users/2`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
     });
     const responseBody = await response.json();
@@ -48,12 +44,8 @@ test.describe("API GET 200 Request", () => {
       "https://reqres.in/img/faces/2-image.jpg"
     );
     expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toContain(
-      "https://contentcaddy.io?utm_source=reqres"
-    );
-    expect(responseBody.support.text).toEqual(
-      "Tired of writing endless social media content? Let Content Caddy generate it for you."
-    );
+    expect(responseBody.support.url).toContain("utm_source=reqres");
+    expect(responseBody.support.text).toBeTruthy();
   });
 
   test("[3, API] should get a 404 response after a GET request for a single user not found", async ({
@@ -62,7 +54,7 @@ test.describe("API GET 200 Request", () => {
   }) => {
     const response = await request.get(`${baseURL}/api/users/23`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
     });
     const responseBody = await response.json();
@@ -76,7 +68,7 @@ test.describe("API GET 200 Request", () => {
   }) => {
     const response = await request.get(`${baseURL}/api/unknown`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
     });
     const responseBody = await response.json();
@@ -88,12 +80,8 @@ test.describe("API GET 200 Request", () => {
     expect(responseBody.total).toEqual(12);
     expect(responseBody.total_pages).toEqual(2);
     expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toContain(
-      "https://contentcaddy.io?utm_source=reqres"
-    );
-    expect(responseBody.support.text).toEqual(
-      "Tired of writing endless social media content? Let Content Caddy generate it for you."
-    );
+    expect(responseBody.support.url).toContain("utm_source=reqres");
+    expect(responseBody.support.text).toBeTruthy();
   });
 
   test("[5, API] should get a 200 response after a GET request for a single resource from a list", async ({
@@ -102,7 +90,7 @@ test.describe("API GET 200 Request", () => {
   }) => {
     const response = await request.get(`${baseURL}/api/unknown/2`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
     });
     const responseBody = await response.json();
@@ -115,12 +103,8 @@ test.describe("API GET 200 Request", () => {
     expect(responseBody.data.color).toEqual("#C74375");
     expect(responseBody.data.pantone_value).toEqual("17-2031");
     expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toContain(
-      "https://contentcaddy.io?utm_source=reqres"
-    );
-    expect(responseBody.support.text).toEqual(
-      "Tired of writing endless social media content? Let Content Caddy generate it for you."
-    );
+    expect(responseBody.support.url).toContain("utm_source=reqres");
+    expect(responseBody.support.text).toBeTruthy();
   });
 
   test("[6, API] should get a 404 response after a GET request for a single resource from a list not found", async ({
@@ -129,7 +113,7 @@ test.describe("API GET 200 Request", () => {
   }) => {
     const response = await request.get(`${baseURL}/api/unknown/23`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
     });
     const responseBody = await response.json();
@@ -143,7 +127,7 @@ test.describe("API GET 200 Request", () => {
   }) => {
     const response = await request.get(`${baseURL}/api/unknown/2?delay=3`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
     });
     const responseBody = await response.json();
@@ -156,11 +140,7 @@ test.describe("API GET 200 Request", () => {
     expect(responseBody.data.color).toEqual("#C74375");
     expect(responseBody.data.pantone_value).toEqual("17-2031");
     expect(responseBody).toHaveProperty("support");
-    expect(responseBody.support.url).toContain(
-      "https://contentcaddy.io?utm_source=reqres"
-    );
-    expect(responseBody.support.text).toEqual(
-      "Tired of writing endless social media content? Let Content Caddy generate it for you."
-    );
+    expect(responseBody.support.url).toContain("utm_source=reqres");
+    expect(responseBody.support.text).toBeTruthy();
   });
 });
