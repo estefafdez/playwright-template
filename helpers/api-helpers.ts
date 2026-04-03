@@ -21,7 +21,7 @@ export class ApiHelpers {
     const startTime = Date.now();
 
     const defaultHeaders = {
-      "x-api-key": "reqres-free-v1",
+      "x-api-key": process.env.REQRES_API_KEY,
       "Content-Type": "application/json",
       ...options?.headers,
     };
