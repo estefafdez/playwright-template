@@ -50,8 +50,7 @@ test.describe("API DELETE Requests - Resource Deletion", () => {
 
     const response = await apiHelper.makeRequest("DELETE", `/api/users/${userId}`, {
       headers: {
-        "User-Agent": "Playwright-DELETE-Test",
-        Accept: "application/json",
+        "x-api-key": process.env.REQRES_API_KEY!,
       },
     });
 
