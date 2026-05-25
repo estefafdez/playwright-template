@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import TodoPage from "../../pageobject/TodoPage";
+import TodoPage from "../../pages/TodoPage";
 
 test.describe("TodoMVC Tests", () => {
   test.beforeEach(async ({ page }) => {

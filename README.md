@@ -49,14 +49,16 @@ playwright-template/
 ├── elements/              # Locators organised by page area
 │   ├── FormElements.ts
 │   ├── HomeElements.ts
-│   └── NavigationElements.ts
+│   ├── NavigationElements.ts
+│   └── TodoElements.ts
 ├── helpers/               # Shared utilities
 │   ├── api-helpers.ts     # HTTP client and schema validators
 │   └── api-setup.ts       # Delay helper to avoid rate limiting
 ├── pages/                 # Page Objects (actions per page)
 │   ├── ContactPage.ts
 │   ├── HomePage.ts
-│   └── NavigationPage.ts
+│   ├── NavigationPage.ts
+│   └── TodoPage.ts
 ├── tests/
 │   ├── api/               # REST API tests (GET, POST, PUT, PATCH, DELETE)
 │   └── web/               # Web UI tests
