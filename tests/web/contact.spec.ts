@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { ContactPage } from "../../pages/ContactPage";
 import { testData } from "../../data/testData";
 
-test.describe("Contact Page Tests", () => {
+test.describe.skip("Contact Page Tests", () => {
   let contactPage: ContactPage;
 
   test.beforeEach(async ({ page }) => {

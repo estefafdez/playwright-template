@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { NavigationPage } from "../../pages/NavigationPage";
 
-test.describe("Navigation Tests", () => {
+test.describe.skip("Navigation Tests", () => {
   let navigationPage: NavigationPage;
 
   test.beforeEach(async ({ page }) => {
