@@ -136,7 +136,3 @@ export const TEST_DATA = {
   },
 };
 
-// Helper function to add delay between API tests to avoid rate limiting
-export const addApiDelay = async (delayMs: number = 1000) => {
-  await new Promise((resolve) => setTimeout(resolve, delayMs));
-};
