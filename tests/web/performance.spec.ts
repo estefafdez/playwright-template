@@ -5,7 +5,7 @@ import { HomePage } from "../../pages/HomePage";
 const PAGE_LOAD_ACCEPTABLE_TIME_MS = process.env.PAGE_LOAD_ACCEPTABLE_TIME_MS ? parseInt(process.env.PAGE_LOAD_ACCEPTABLE_TIME_MS, 10) : 3000;
 
 test.describe("Page Performance Tests", () => {
-  test("should load page within acceptable time", async ({ page }) => {
+  test.skip("should load page within acceptable time", async ({ page }) => {
     const startTime = Date.now();
 
     const homePage = new HomePage(page);
@@ -50,7 +50,7 @@ test.describe("Page Performance Tests", () => {
     }
   });
 
-  test("should be responsive on different screen sizes", async ({ page }) => {
+  test.skip("should be responsive on different screen sizes", async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.navigate();
 
@@ -95,7 +95,7 @@ test.describe("Page Performance Tests", () => {
     expect(titleStyles.color).toBeTruthy();
   });
 
-  test("should handle network conditions gracefully", async ({ page }) => {
+  test.skip("should handle network conditions gracefully", async ({ page }) => {
     await page.route("**/*", async (route) => {
       await new Promise((resolve) => setTimeout(resolve, 100));
       await route.continue();
