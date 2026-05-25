@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { NavigationPage } from "../../pageobject/NavigationPage";
+import { NavigationPage } from "../../pages/NavigationPage";
 
 test.describe("Navigation Tests", () => {
   let navigationPage: NavigationPage;

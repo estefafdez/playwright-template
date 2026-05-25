@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { HomePage } from "../../pageobject/HomePage";
+import { HomePage } from "../../pages/HomePage";
 
 // Acceptable page load time in ms, configurable via environment variable
 const PAGE_LOAD_ACCEPTABLE_TIME_MS = process.env.PAGE_LOAD_ACCEPTABLE_TIME_MS ? parseInt(process.env.PAGE_LOAD_ACCEPTABLE_TIME_MS, 10) : 3000;
