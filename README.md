@@ -8,7 +8,7 @@ A reference template for learning **Playwright** with **TypeScript**. Includes w
 
 ## Requirements
 
-- Node.js 18+
+- Node.js 24+
 - npm 9+
 
 ## Installation
