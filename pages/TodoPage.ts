@@ -1,5 +1,4 @@
 import { Page } from "@playwright/test";
-import { baseURL } from "../config/baseURL";
 import TodoElements from "../elements/TodoElements";
 
 export class TodoPage {
@@ -12,7 +11,7 @@ export class TodoPage {
   }
 
   async navigate() {
-    await this.page.goto(baseURL.todo);
+    await this.page.goto("https://demo.playwright.dev/todomvc/#/");
   }
 
   async addTodo(text: string) {

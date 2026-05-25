@@ -1,27 +1,52 @@
 import { expect, test } from "@playwright/test";
+import { ApiHelpers } from "../../helpers/api-helpers";
+import addApiDelay from "../../helpers/api-setup";
 
-test.describe("API PATCH 200 Request", () => {
-  test("[14, API] should get a 200 response after a PATCH request to update the user data", async ({
-    request,
-    baseURL,
-  }) => {
-    const response = await request.patch(`${baseURL}/api/users/2`, {
-      headers: {
-        "x-api-key": process.env.REQRES_API_KEY!,
-      },
-      data: {
-        body: {
-          name: "morpheus",
-          job: "zion resident",
-        },
-      },
+test.describe("API PATCH Requests - Partial Updates", () => {
+  let apiHelper: ApiHelpers;
+
+  test.beforeEach(async ({ request, baseURL }) => {
+    apiHelper = new ApiHelpers(request, baseURL || "https://reqres.in");
+  });
+
+  test.afterEach(async () => {
+    await addApiDelay();
+  });
+
+  test("[25, API] should partially update user with PATCH request", async () => {
+    const userId = 2;
+    const patchData = {
+      name: "morpheus",
+      job: "zion resident",
+    };
+
+    const response = await apiHelper.makeRequest("PATCH", `/api/users/${userId}`, {
+      data: patchData,
     });
 
-    const responseBody = await response.json();
+    expect(response.status).toBe(200);
+    apiHelper.validateResponseTime(response.responseTime);
 
-    expect(response.status()).toBe(200);
-    expect(responseBody.body.name).toEqual("morpheus");
-    expect(responseBody.body.job).toEqual("zion resident");
-    expect(responseBody).toHaveProperty("updatedAt");
+    expect(response.body.name).toEqual(patchData.name);
+    expect(response.body.job).toEqual(patchData.job);
+    expect(response.body).toHaveProperty("updatedAt");
+
+    expect(response.body.updatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
+  });
+
+  test("[26, API] should update only job field with PATCH", async () => {
+    const userId = 3;
+    const jobOnlyUpdate = {
+      job: "Lead Developer",
+    };
+
+    const response = await apiHelper.makeRequest("PATCH", `/api/users/${userId}`, {
+      data: jobOnlyUpdate,
+    });
+
+    expect(response.status).toBe(200);
+    expect(response.body.job).toEqual(jobOnlyUpdate.job);
+    expect(response.body).not.toHaveProperty("name");
+    expect(response.body).toHaveProperty("updatedAt");
   });
 });
