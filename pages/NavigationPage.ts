@@ -1,5 +1,4 @@
 import { Page } from "@playwright/test";
-import { baseURL } from "../config/baseURL";
 import { NavigationElements } from "../elements/NavigationElements";
 
 export class NavigationPage {
@@ -12,7 +11,7 @@ export class NavigationPage {
   }
 
   async navigate() {
-    await this.page.goto(baseURL.web);
+    await this.page.goto("/");
   }
 
   async clickHomeLink() {

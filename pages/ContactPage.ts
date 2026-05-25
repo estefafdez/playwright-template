@@ -1,5 +1,4 @@
 import { Page } from "@playwright/test";
-import { baseURL } from "../config/baseURL";
 import { FormElements } from "../elements/FormElements";
 
 export class ContactPage {
@@ -12,7 +11,7 @@ export class ContactPage {
   }
 
   async navigate() {
-    await this.page.goto(`${baseURL.web}/contact`);
+    await this.page.goto("/contact");
   }
 
   async fillContactForm(name: string, email: string, message: string) {
