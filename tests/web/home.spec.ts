@@ -27,10 +27,7 @@ test.describe("Home Tests", () => {
   test("should have proper page structure", async () => {
     await expect(homePage.homeElements.pageLogo).toBeVisible();
     await expect(homePage.homeElements.homePageTitle).toBeVisible();
-
-    if (await homePage.homeElements.navigationMenu.isVisible()) {
-      await expect(homePage.homeElements.navigationMenu).toBeVisible();
-    }
+    await expect(homePage.homeElements.navigationMenu).toBeVisible();
   });
 
   test("should be accessible via keyboard", async ({ page }) => {

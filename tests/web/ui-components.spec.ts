@@ -32,14 +32,11 @@ test.describe("UI Components Tests", () => {
 
   test("should verify search functionality if available", async () => {
     const searchBox = homePage.homeElements.searchBox;
-
-    if (await searchBox.isVisible()) {
-      await expect(searchBox).toBeEditable();
-      await searchBox.fill("test search");
-      await expect(searchBox).toHaveValue("test search");
-      await searchBox.clear();
-      await expect(searchBox).toHaveValue("");
-    }
+    await expect(searchBox).toBeEditable();
+    await searchBox.fill("test search");
+    await expect(searchBox).toHaveValue("test search");
+    await searchBox.clear();
+    await expect(searchBox).toHaveValue("");
   });
 
   test("should not have JavaScript errors on load", async ({ page }) => {
