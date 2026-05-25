@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { ContactPage } from "../../pages/ContactPage";
+import { testData } from "../../data/testData";
 
 test.describe("Contact Page Tests", () => {
   let contactPage: ContactPage;
@@ -16,29 +17,22 @@ test.describe("Contact Page Tests", () => {
     await expect(contactPage.formElements.submitButton).toBeVisible();
   });
 
-  test("should fill and submit the contact form", async () => {
-    await contactPage.fillContactForm(
-      "John Doe",
-      "john.doe@example.com",
-      "This is a test message for the contact form."
-    );
+  test("should fill and submit the contact form with valid data", async () => {
+    const { name, email, message } = testData.validUsers[0];
 
-    await expect(contactPage.formElements.nameInput).toHaveValue("John Doe");
-    await expect(contactPage.formElements.emailInput).toHaveValue("john.doe@example.com");
-    await expect(contactPage.formElements.messageTextarea).toHaveValue(
-      "This is a test message for the contact form."
-    );
+    await contactPage.fillContactForm(name, email, message);
+
+    await expect(contactPage.formElements.nameInput).toHaveValue(name);
+    await expect(contactPage.formElements.emailInput).toHaveValue(email);
+    await expect(contactPage.formElements.messageTextarea).toHaveValue(message);
 
     await contactPage.submitForm();
   });
 
   test("should reset the form and clear all fields", async () => {
-    await contactPage.fillContactForm(
-      "Test User",
-      "test@example.com",
-      "Message to be cleared."
-    );
+    const { name, email, message } = testData.validUsers[1];
 
+    await contactPage.fillContactForm(name, email, message);
     await contactPage.resetForm();
 
     await expect(contactPage.formElements.nameInput).toHaveValue("");
@@ -53,14 +47,12 @@ test.describe("Contact Page Tests", () => {
   });
 
   test("should handle special characters in form fields", async () => {
-    const specialName = "José María O'Connor-Smith";
-    const specialEmail = "jose.maria@test-domain.co.uk";
-    const specialMessage = "Testing: äöüßñç @#$%^&*()";
+    const { name, email, message } = testData.specialCharacters;
 
-    await contactPage.fillContactForm(specialName, specialEmail, specialMessage);
+    await contactPage.fillContactForm(name, email, message);
 
-    await expect(contactPage.formElements.nameInput).toHaveValue(specialName);
-    await expect(contactPage.formElements.emailInput).toHaveValue(specialEmail);
-    await expect(contactPage.formElements.messageTextarea).toHaveValue(specialMessage);
+    await expect(contactPage.formElements.nameInput).toHaveValue(name);
+    await expect(contactPage.formElements.emailInput).toHaveValue(email);
+    await expect(contactPage.formElements.messageTextarea).toHaveValue(message);
   });
 });
