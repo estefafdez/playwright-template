@@ -57,7 +57,7 @@ const config: PlaywrightTestConfig = {
   globalTimeout: 15 * 60 * 1000, // 15 minutes
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    actionTimeout: 0,
+    actionTimeout: 10000,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
     headless: true, // Set to false if you want to see the browser during tests
