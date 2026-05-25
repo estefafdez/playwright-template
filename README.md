@@ -89,5 +89,4 @@ playwright-template/
 
 ## Test plans in Qase
 
-- [API Tests](https://app.qase.io/project/CYEX)
-- [Web Tests](https://app.qase.io/project/CYEX)
+- [All Tests](https://app.qase.io/project/CYEX)
