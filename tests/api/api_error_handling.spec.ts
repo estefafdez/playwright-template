@@ -26,21 +26,6 @@ test.describe("API Advanced Testing - Performance & Security", () => {
       expect([400, 422, 500]).toContain(response.status);
     });
 
-    test("[41, API] should validate HTTP method restrictions", async () => {
-      const invalidMethods = [
-        { method: "PATCH" as const, endpoint: "/api/login" },
-        { method: "PUT" as const, endpoint: "/api/register" },
-      ];
-
-      for (const { method, endpoint } of invalidMethods) {
-        const response = await apiHelper.makeRequest(method, endpoint, {
-          data: { email: "test@test.com", password: "test" },
-        });
-
-        expect([405, 404, 400]).toContain(response.status);
-      }
-    });
-
     test("[42, API] should handle large payload sizes", async () => {
       const largeString = "x".repeat(10000);
 

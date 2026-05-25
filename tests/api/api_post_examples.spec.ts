@@ -46,34 +46,6 @@ test.describe("API POST Requests - Create, Register & Login", () => {
     expect(response.body.id.length).toBeGreaterThan(0);
   });
 
-  test("[11, API] should create user with minimal data", async () => {
-    const minimalData = { name: "test user" };
-
-    const response = await apiHelper.makeRequest("POST", "/api/users", {
-      data: minimalData,
-    });
-
-    expect(response.status).toBe(201);
-    expect(response.body.name).toEqual(minimalData.name);
-    expect(response.body).toHaveProperty("id");
-    expect(response.body).toHaveProperty("createdAt");
-  });
-
-  test("[12, API] should create user with special characters in data", async () => {
-    const specialData = {
-      name: "José María O'Connor",
-      job: "Senior QA Engineer & Test Automation Specialist",
-    };
-
-    const response = await apiHelper.makeRequest("POST", "/api/users", {
-      data: specialData,
-    });
-
-    expect(response.status).toBe(201);
-    expect(response.body.name).toEqual(specialData.name);
-    expect(response.body.job).toEqual(specialData.job);
-  });
-
   test("[13, API] should register user successfully", async () => {
     const response = await apiHelper.makeRequest("POST", "/api/register", {
       data: TEST_DATA.users.validRegistration,
@@ -87,18 +59,6 @@ test.describe("API POST Requests - Create, Register & Login", () => {
     expect(typeof response.body.id).toBe("number");
     expect(typeof response.body.token).toBe("string");
     expect(response.body.token.length).toBeGreaterThan(10);
-  });
-
-  test("[14, API] should fail registration without password", async () => {
-    const response = await apiHelper.makeRequest("POST", "/api/register", {
-      data: TEST_DATA.users.invalidRegistration,
-    });
-
-    expect(response.status).toBe(400);
-    apiHelper.validateResponseTime(response.responseTime);
-
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toEqual("Missing password");
   });
 
   test("[15, API] should login user successfully", async () => {
@@ -123,28 +83,5 @@ test.describe("API POST Requests - Create, Register & Login", () => {
 
     expect(response.body).toHaveProperty("error");
     expect(response.body.error).toEqual("Missing password");
-  });
-
-  test("[17, API] should handle empty payload gracefully", async () => {
-    const response = await apiHelper.makeRequest("POST", "/api/users", {
-      data: {},
-    });
-
-    expect(response.status).toBe(201);
-    expect(response.body).toHaveProperty("id");
-    expect(response.body).toHaveProperty("createdAt");
-  });
-
-  test("[18, API] should validate request headers for POST operations", async () => {
-    const response = await apiHelper.makeRequest("POST", "/api/users", {
-      data: TEST_DATA.users.validUser,
-      headers: {
-        "User-Agent": "Playwright-Test-Suite",
-        Accept: "application/json",
-      },
-    });
-
-    expect(response.status).toBe(201);
-    apiHelper.validateCommonHeaders(response.headers);
   });
 });

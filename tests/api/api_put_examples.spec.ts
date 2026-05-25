@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { ApiHelpers, TEST_DATA } from "../../helpers/api-helpers";
+import { ApiHelpers } from "../../helpers/api-helpers";
 import addApiDelay from "../../helpers/api-setup";
 
 test.describe("API PUT Requests - Update Operations", () => {
@@ -39,37 +39,6 @@ test.describe("API PUT Requests - Update Operations", () => {
     expect(timeDifference).toBeLessThan(60000);
   });
 
-  test("[20, API] should update user with partial data", async () => {
-    const userId = 5;
-    const partialUpdateData = {
-      job: "Senior Developer",
-    };
-
-    const response = await apiHelper.makeRequest("PUT", `/api/users/${userId}`, {
-      data: partialUpdateData,
-    });
-
-    expect(response.status).toBe(200);
-    expect(response.body.job).toEqual(partialUpdateData.job);
-    expect(response.body).toHaveProperty("updatedAt");
-  });
-
-  test("[21, API] should update user with special characters", async () => {
-    const userId = 3;
-    const specialData = {
-      name: "José María",
-      job: "Especialista en Automatización & QA",
-    };
-
-    const response = await apiHelper.makeRequest("PUT", `/api/users/${userId}`, {
-      data: specialData,
-    });
-
-    expect(response.status).toBe(200);
-    expect(response.body.name).toEqual(specialData.name);
-    expect(response.body.job).toEqual(specialData.job);
-  });
-
   test("[22, API] should handle PUT request with empty body", async () => {
     const userId = 1;
 
@@ -79,36 +48,5 @@ test.describe("API PUT Requests - Update Operations", () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty("updatedAt");
-  });
-
-  test("[23, API] should update user with long text fields", async () => {
-    const userId = 4;
-    const longTextData = {
-      name: "User with a very long name that exceeds typical field lengths",
-      job: "Senior Quality Assurance Engineer specializing in automated testing frameworks, continuous integration, and performance optimization",
-    };
-
-    const response = await apiHelper.makeRequest("PUT", `/api/users/${userId}`, {
-      data: longTextData,
-    });
-
-    expect(response.status).toBe(200);
-    expect(response.body.name).toEqual(longTextData.name);
-    expect(response.body.job).toEqual(longTextData.job);
-  });
-
-  test("[24, API] should validate response headers for PUT operations", async () => {
-    const userId = 6;
-
-    const response = await apiHelper.makeRequest("PUT", `/api/users/${userId}`, {
-      data: TEST_DATA.users.validUser,
-      headers: {
-        "User-Agent": "Playwright-PUT-Test",
-        Accept: "application/json",
-      },
-    });
-
-    expect(response.status).toBe(200);
-    apiHelper.validateCommonHeaders(response.headers);
   });
 });

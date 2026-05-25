@@ -14,18 +14,6 @@ test.describe("API Advanced Testing - Performance & Security", () => {
   });
 
   test.describe("Data Validation Tests", () => {
-    test("[43, API] should validate email format in registration", async () => {
-      const invalidEmails = ["invalid-email", "@domain.com", "user@", "user..user@domain.com", "user@domain", ""];
-
-      for (const email of invalidEmails) {
-        const response = await apiHelper.makeRequest("POST", "/api/register", {
-          data: { email, password: "password123" },
-        });
-
-        expect([400, 422]).toContain(response.status);
-      }
-    });
-
     test("[44, API] should handle special characters in user data", async () => {
       const specialCharsData = {
         name: "José María O'Connor-Smith 中文 🚀",

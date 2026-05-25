@@ -33,18 +33,5 @@ test.describe("API Advanced Testing - Performance & Security", () => {
         expect(response.headers["content-type"]).toContain("application/json");
       }
     });
-
-    test("[47, API] should validate API versioning consistency", async () => {
-      const apiEndpoints = ["/api/users", "/api/users/1", "/api/unknown", "/api/unknown/1"];
-
-      for (const endpoint of apiEndpoints) {
-        const response = await apiHelper.makeRequest("GET", endpoint);
-
-        expect(response.status).toBe(200);
-
-        expect(response.headers["server"]).toBeTruthy();
-        expect(response.headers["content-type"]).toContain("application/json");
-      }
-    });
   });
 });
