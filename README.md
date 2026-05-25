@@ -2,92 +2,92 @@
 
 [![E2E tests](https://github.com/estefafdez/playwright-template/actions/workflows/playwright.yml/badge.svg)](https://github.com/estefafdez/playwright-template/actions/workflows/playwright.yml)
 
-Template de referencia para aprender **Playwright** con **TypeScript**. Incluye tests web y API, Page Object Model, datos de test, integración con Qase y configuración lista para CI.
+A reference template for learning **Playwright** with **TypeScript**. Includes web and API tests, Page Object Model, test data management, Qase integration and CI-ready configuration.
 
 ---
 
-## Requisitos
+## Requirements
 
 - Node.js 18+
 - npm 9+
 
-## Instalación
+## Installation
 
 ```bash
 npm install
 npx playwright install
 ```
 
-Crea un fichero `.env` en la raíz con las variables necesarias:
+Create a `.env` file in the root with the required variables:
 
 ```env
-REQRES_API_KEY=tu_api_key
+REQRES_API_KEY=your_api_key
 ```
 
 ---
 
-## Comandos
+## Commands
 
-| Comando | Descripción |
+| Command | Description |
 |---|---|
-| `npm test` | Ejecuta todos los tests |
-| `npm run test:web` | Solo tests web |
-| `npm run test:api` | Solo tests de API |
-| `npm run ui` | Abre el modo UI interactivo de Playwright |
-| `npm run debug` | Ejecuta en modo debug (paso a paso) |
-| `npm run report` | Abre el último informe HTML |
+| `npm test` | Run all tests |
+| `npm run test:web` | Web tests only |
+| `npm run test:api` | API tests only |
+| `npm run ui` | Open the Playwright interactive UI mode |
+| `npm run debug` | Run in debug mode (step by step) |
+| `npm run report` | Open the last HTML report |
 
 ---
 
-## Estructura del proyecto
+## Project structure
 
 ```
 playwright-template/
-├── data/                  # Datos de test reutilizables
-│   ├── testData.ts        # Datos para tests web (formularios, etc.)
-│   └── users/             # Datos de usuario para tests de API (JSON)
-├── elements/              # Locators organizados por área de la página
+├── data/                  # Reusable test data
+│   ├── testData.ts        # Data for web tests (forms, etc.)
+│   └── users/             # User data for API tests (JSON)
+├── elements/              # Locators organised by page area
 │   ├── FormElements.ts
 │   ├── HomeElements.ts
 │   └── NavigationElements.ts
-├── helpers/               # Utilidades compartidas
-│   ├── api-helpers.ts     # Cliente HTTP y validadores de schema
-│   └── api-setup.ts       # Delay entre requests para evitar rate limiting
-├── pages/                 # Page Objects (acciones por página)
+├── helpers/               # Shared utilities
+│   ├── api-helpers.ts     # HTTP client and schema validators
+│   └── api-setup.ts       # Delay helper to avoid rate limiting
+├── pages/                 # Page Objects (actions per page)
 │   ├── ContactPage.ts
 │   ├── HomePage.ts
 │   └── NavigationPage.ts
 ├── tests/
-│   ├── api/               # Tests de API REST (GET, POST, PUT, PATCH, DELETE)
-│   └── web/               # Tests de interfaz web
-├── types/                 # Tipos TypeScript compartidos
-├── playwright.config.ts   # Configuración de Playwright
-└── .env                   # Variables de entorno (no commitear)
+│   ├── api/               # REST API tests (GET, POST, PUT, PATCH, DELETE)
+│   └── web/               # Web UI tests
+├── types/                 # Shared TypeScript types
+├── playwright.config.ts   # Playwright configuration
+└── .env                   # Environment variables (do not commit)
 ```
 
 ---
 
-## Proyectos configurados
+## Configured projects
 
-| Proyecto | URL base | Tests |
+| Project | Base URL | Tests |
 |---|---|---|
 | `web` | https://testing.qaautomationlabs.com | `tests/web/` |
 | `api` | https://reqres.in | `tests/api/` |
 
 ---
 
-## Patrones que se demuestran
+## Patterns demonstrated
 
-- **Page Object Model (POM):** las páginas encapsulan acciones y los elementos encapsulan locators
-- **Datos de test separados:** `data/` mantiene los datos fuera de los tests
-- **Helpers de API:** cliente reutilizable con validación de schema y tiempo de respuesta
-- **Configuración por entorno:** `baseURL` se define en `playwright.config.ts`, no en el código
-- **Integración con Qase:** los tests llevan el ID entre corchetes `[N, Suite]`
-- **CI con GitHub Actions:** configurado para ejecutar en cada push
+- **Page Object Model (POM):** pages encapsulate actions, elements encapsulate locators
+- **Separated test data:** `data/` keeps inputs out of test files
+- **API helpers:** reusable HTTP client with schema and response-time validation
+- **Environment-based config:** `baseURL` is defined in `playwright.config.ts`, not in code
+- **Qase integration:** tests carry their ID in brackets `[N, Suite]`
+- **CI with GitHub Actions:** configured to run on every push
 
 ---
 
-## Planes de test en Qase
+## Test plans in Qase
 
 - [API Tests](https://app.qase.io/project/CYEX)
 - [Web Tests](https://app.qase.io/project/CYEX)

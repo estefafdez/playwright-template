@@ -6,9 +6,9 @@ export const testData = {
       message: "This is a test message for contact form validation."
     },
     {
-      name: "María García",
-      email: "maria.garcia@ejemplo.com", 
-      message: "Mensaje de prueba con caracteres especiales: áéíóú ñ ü"
+      name: "Maria Garcia",
+      email: "maria.garcia@example.com",
+      message: "Test message with accented characters: áéíóú ñ ü"
     },
     {
       name: "Test User",
@@ -27,9 +27,9 @@ export const testData = {
   ],
   
   specialCharacters: {
-    name: "José María O'Connor-Smith",
+    name: "Jose Maria O'Connor-Smith",
     email: "jose.maria@test-domain.co.uk",
-    message: "Testing: äöüßñç @#$%^&*()_+-=[]{}|;':\",./<>?¡¿"
+    message: "Testing special chars: äöüßñç @#$%^&*()_+-=[]{}|;':\",./<>?"
   },
   
   longContent: {
