@@ -24,12 +24,12 @@
   },
   "homepage": "https://github.com/estefafdez/playwright-template#readme",
   "devDependencies": {
-    "@playwright/test": "^1.59.1",
-    "@types/node": "^25.5.2",
-    "dotenv": "^16.4.5",
-    "playwright": "^1.59.1"
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.9.1",
+    "dotenv": "^17.4.2",
+    "playwright": "^1.60.0"
   },
-"dependencies": {
-    "playwright-qase-reporter": "2.2.3"
+  "dependencies": {
+    "playwright-qase-reporter": "^2.5.1"
   }
 }
