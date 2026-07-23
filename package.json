@@ -1,6 +1,7 @@
 {
   "name": "playwright-template",
   "version": "1.0.0",
+  "type": "module",
   "description": "Example of a project with Playwright, Typescript and some integrations.",
   "main": "index.js",
   "scripts": {
