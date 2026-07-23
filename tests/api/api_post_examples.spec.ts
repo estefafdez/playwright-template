@@ -1,16 +1,21 @@
-import { expect, test } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "playwright-opentelemetry/fixture";
 import { ApiHelpers, TEST_DATA } from "../../helpers/api-helpers";
 import addApiDelay from "../../helpers/api-setup";
+import { readFileSync } from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
 
-const fs = require("fs");
-const userDataPath = `${__dirname}/../../data/users`;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const userDataPath = join(__dirname, "../../data/users");
 
 test.describe("API POST Requests - Create, Register & Login", () => {
   let apiHelper: ApiHelpers;
   let userData: any;
 
   test.beforeAll(async () => {
-    const user1Data = fs.readFileSync(`${userDataPath}/user1.json`, "utf8");
+    const user1Data = readFileSync(join(userDataPath, "user1.json"), "utf8");
     userData = JSON.parse(user1Data);
   });
 
