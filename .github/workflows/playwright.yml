@@ -71,7 +71,7 @@ jobs:
         if: always()
         run: npx --yes tdpw playwright-report/ --token="${TESTDINO_TOKEN}" --upload-html
         env:
-          TESTDINO_TOKEN: ${{ secrets.TDPW_API_KEY }}
+          TESTDINO_TOKEN: ${{ secrets.TESTDINO_TOKEN }}
 
       - name: Notify Slack
         uses: ravsamhq/notify-slack-action@v2
