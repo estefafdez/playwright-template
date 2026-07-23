@@ -59,11 +59,15 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
+      - name: Archive OpenTelemetry traces
+        if: always()
+        run: find test-results -name '*-pw-otel.zip' -print0 2>/dev/null | tar -czf playwright-opentelemetry-zips.tar.gz --null -T - || true
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-opentelemetry-zips
-          path: test-results/**/*-pw-otel.zip
+          path: playwright-opentelemetry-zips.tar.gz
           if-no-files-found: warn
           retention-days: 30
 
