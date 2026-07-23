@@ -1,4 +1,5 @@
-import { expect, test } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "playwright-opentelemetry/fixture";
 import TodoPage from "../../pages/TodoPage";
 
 test.describe("TodoMVC Tests", () => {
