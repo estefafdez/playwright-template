@@ -5,19 +5,7 @@ import type {
 } from "playwright-opentelemetry/fixture" with { "resolution-mode": "import" };
 import "dotenv/config";
 
-const honeycombApiKey = process.env.HONEYCOMB_API_KEY;
-
 const playwrightOpentelemetry: PlaywrightOpentelemetryConfig = {
-  otlpEndpoint: {
-    url: "https://api.eu1.honeycomb.io/v1/traces",
-    ...(honeycombApiKey
-      ? {
-          headers: {
-            "x-honeycomb-team": honeycombApiKey,
-          },
-        }
-      : {}),
-  },
   storeTraceZip: true,
 };
 
@@ -74,7 +62,7 @@ export default defineConfig<PlaywrightOpentelemetryUseOptions>({
   use: {
     actionTimeout: 10000,
     playwrightOpentelemetry,
-    trace: "retain-on-failure",
+    trace: "on",
     screenshot: "only-on-failure",
     headless: true, // Set to false if you want to see the browser during tests
   },
