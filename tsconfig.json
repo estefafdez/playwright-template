@@ -11,7 +11,8 @@
     "strictPropertyInitialization": false,
     "esModuleInterop": true,
     "downlevelIteration": true,
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "ignoreDeprecations": "6.0"
   },
   "include": ["**/*.ts"],
