@@ -24,15 +24,17 @@ const xrayOptions = {
   outputFile: "playwright-report/xray-report.xml",
 };
 
-const reporter: NonNullable<PlaywrightTestConfig["reporter"]> = [
+const testDinoToken = process.env.TESTDINO_TOKEN?.trim();
+
+const reporter = [
   ["html", { open: "on-failure" }],
   ["junit", xrayOptions],
   ["list", { printSteps: true }],
   ["json", { outputFile: "playwright-report/results.json" }],
-];
+] as const satisfies NonNullable<PlaywrightTestConfig["reporter"]>;
 
-if (process.env.TESTDINO_TOKEN) {
-  reporter.unshift(["@testdino/playwright", { token: process.env.TESTDINO_TOKEN }]);
+if (testDinoToken) {
+  reporter.unshift(["@testdino/playwright", { token: testDinoToken }]);
 }
 
 /**
