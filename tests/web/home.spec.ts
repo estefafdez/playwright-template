@@ -16,7 +16,7 @@ test.describe("Home Tests", () => {
 
   test("should check the Home Page Title", async () => {
     await expect(homePage.homeElements.homePageTitle).toBeVisible();
-    await expect(homePage.homeElements.homePageTitle).toHaveText(/Tools Demo/);
+    await expect(homePage.homeElements.homePageTitle).toHaveText(/UI Automation Playground/i);
   });
 
   test("should load page successfully", async ({ page }) => {

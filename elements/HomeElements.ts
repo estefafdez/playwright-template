@@ -13,7 +13,10 @@ export class HomeElements {
   constructor(page: Page) {
     this.page = page;
     this.pageLogo = this.page.getByRole("img", { name: "QA Automation Labs" });
-    this.homePageTitle = this.page.getByRole("heading", { name: "Tools Demo" });
+    this.homePageTitle = this.page.getByRole("heading", {
+      level: 1,
+      name: /UI Automation Playground/i,
+    });
     this.navigationMenu = this.page.getByRole("navigation").first();
     this.footerText = this.page.locator("footer");
     this.mainContent = this.page.getByRole("main");
