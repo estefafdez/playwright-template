@@ -1,11 +1,25 @@
-import type { PlaywrightTestConfig } from "@playwright/test";
-import { devices } from "@playwright/test";
+import { defineConfig, devices } from "@playwright/test";
+import type {
+  PlaywrightOpentelemetryConfig,
+  PlaywrightOpentelemetryUseOptions,
+} from "playwright-opentelemetry/fixture" with { "resolution-mode": "import" };
+import "dotenv/config";
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-require('dotenv').config();
+const honeycombApiKey = process.env.HONEYCOMB_API_KEY;
+
+const playwrightOpentelemetry: PlaywrightOpentelemetryConfig = {
+  otlpEndpoint: {
+    url: "https://api.eu1.honeycomb.io/v1/traces",
+    ...(honeycombApiKey
+      ? {
+          headers: {
+            "x-honeycomb-team": honeycombApiKey,
+          },
+        }
+      : {}),
+  },
+  storeTraceZip: true,
+};
 
 // JUnit reporter config for Xray
 const xrayOptions = {
@@ -27,7 +41,7 @@ const xrayOptions = {
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config: PlaywrightTestConfig = {
+export default defineConfig<PlaywrightOpentelemetryUseOptions>({
   testDir: "./tests",
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
@@ -48,6 +62,7 @@ const config: PlaywrightTestConfig = {
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
+    ["playwright-opentelemetry/reporter"],
     ["html", { open: "on-failure" }],
     ["junit", xrayOptions],
     ["list", { printSteps: true }],
@@ -58,7 +73,8 @@ const config: PlaywrightTestConfig = {
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     actionTimeout: 10000,
-    trace: "on-first-retry",
+    playwrightOpentelemetry,
+    trace: "retain-on-failure",
     screenshot: "only-on-failure",
     headless: true, // Set to false if you want to see the browser during tests
   },
@@ -86,6 +102,4 @@ const config: PlaywrightTestConfig = {
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
   outputDir: "test-results/",
-};
-
-export default config;
+});
