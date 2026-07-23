@@ -59,6 +59,14 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-opentelemetry-zips
+          path: test-results/**/*-pw-otel.zip
+          if-no-files-found: warn
+          retention-days: 30
+
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
