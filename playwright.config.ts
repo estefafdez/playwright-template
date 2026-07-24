@@ -27,9 +27,9 @@ const xrayOptions = {
   outputFile: "playwright-report/xray-report.xml",
 };
 
-const testDinoToken = process.env.TESTDINO_TOKEN?.trim();
+const testDinoToken = process.env.TESTDINO_TOKEN?.trim() || undefined;
 
-const createReporter = (): NonNullable<PlaywrightTestConfig["reporter"]> => {
+const getReporterConfig = (): NonNullable<PlaywrightTestConfig["reporter"]> => {
   const baseReporter: NonNullable<PlaywrightTestConfig["reporter"]> = [
     ["playwright-opentelemetry/reporter"],
     ["html", { open: "on-failure" }],
@@ -66,7 +66,7 @@ export default defineConfig<PlaywrightOpentelemetryUseOptions>({
   /* Opt out of parallel tests on CI. Undefined means that pw will take care of it */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: createReporter(),
+  reporter: getReporterConfig(),
   /* Shared timeout for all tests. This is useful for long-running tests. */
   globalTimeout: 15 * 60 * 1000, // 15 minutes
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
