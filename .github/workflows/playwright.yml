@@ -51,6 +51,7 @@ jobs:
         env:
           CI: true
           REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
+          TESTDINO_TOKEN: ${{ secrets.TESTDINO_TOKEN }}
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -66,12 +67,6 @@ jobs:
           files: playwright-report/xray-report.xml
           check_name: "Playwright Test Results"
           comment_title: "Playwright Test Results"
-
-      - name: Testdino Reporter
-        if: always()
-        run: npx --yes tdpw playwright-report/ --token="${TESTDINO_TOKEN}" --upload-html
-        env:
-          TESTDINO_TOKEN: ${{ secrets.TESTDINO_TOKEN }}
 
       - name: Notify Slack
         uses: ravsamhq/notify-slack-action@v2
