@@ -1,4 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
+import type { PlaywrightTestConfig } from "@playwright/test";
 import type {
   PlaywrightOpentelemetryConfig,
   PlaywrightOpentelemetryUseOptions,
@@ -28,17 +29,19 @@ const xrayOptions = {
 
 const testDinoToken = process.env.TESTDINO_TOKEN?.trim();
 
-const reporter = [
-  ["playwright-opentelemetry/reporter"],
-  ["html", { open: "on-failure" }],
-  ["junit", xrayOptions],
-  ["list", { printSteps: true }],
-  ["json", { outputFile: "playwright-report/results.json" }],
-];
+const createReporter = (): NonNullable<PlaywrightTestConfig["reporter"]> => {
+  const baseReporter: NonNullable<PlaywrightTestConfig["reporter"]> = [
+    ["playwright-opentelemetry/reporter"],
+    ["html", { open: "on-failure" }],
+    ["junit", xrayOptions],
+    ["list", { printSteps: true }],
+    ["json", { outputFile: "playwright-report/results.json" }],
+  ];
 
-if (testDinoToken) {
-  reporter.unshift(["@testdino/playwright", { token: testDinoToken }]);
-}
+  return testDinoToken
+    ? [["@testdino/playwright", { token: testDinoToken }], ...baseReporter]
+    : baseReporter;
+};
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -63,7 +66,7 @@ export default defineConfig<PlaywrightOpentelemetryUseOptions>({
   /* Opt out of parallel tests on CI. Undefined means that pw will take care of it */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter,
+  reporter: createReporter(),
   /* Shared timeout for all tests. This is useful for long-running tests. */
   globalTimeout: 15 * 60 * 1000, // 15 minutes
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
