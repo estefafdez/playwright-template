@@ -1,4 +1,5 @@
-import { expect, test } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "playwright-opentelemetry/fixture";
 import { HomePage } from "../../pages/HomePage";
 
 // Acceptable page load time in ms, configurable via environment variable

@@ -1,6 +1,7 @@
 {
   "name": "playwright-template",
   "version": "1.0.0",
+  "type": "module",
   "description": "Example of a project with Playwright, Typescript and some integrations.",
   "main": "index.js",
   "scripts": {
@@ -27,7 +28,8 @@
     "@playwright/test": "^1.61.1",
     "@types/node": "^26.1.1",
     "dotenv": "^17.4.2",
-    "playwright": "^1.61.1"
+    "playwright": "^1.61.1",
+    "playwright-opentelemetry": "^0.12.1"
   },
   "dependencies": {
     "@testdino/playwright": "^2.0.0",

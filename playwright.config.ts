@@ -1,11 +1,14 @@
+import { defineConfig, devices } from "@playwright/test";
 import type { PlaywrightTestConfig } from "@playwright/test";
-import { devices } from "@playwright/test";
+import type {
+  PlaywrightOpentelemetryConfig,
+  PlaywrightOpentelemetryUseOptions,
+} from "playwright-opentelemetry/fixture" with { "resolution-mode": "import" };
+import "dotenv/config";
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-require('dotenv').config();
+const playwrightOpentelemetry: PlaywrightOpentelemetryConfig = {
+  storeTraceZip: true,
+};
 
 // JUnit reporter config for Xray
 const xrayOptions = {
@@ -24,23 +27,26 @@ const xrayOptions = {
   outputFile: "playwright-report/xray-report.xml",
 };
 
-const testDinoToken = process.env.TESTDINO_TOKEN?.trim();
+const testDinoToken = process.env.TESTDINO_TOKEN?.trim() || undefined;
 
-const reporter: NonNullable<PlaywrightTestConfig["reporter"]> = [
-  ["html", { open: "on-failure" }],
-  ["junit", xrayOptions],
-  ["list", { printSteps: true }],
-  ["json", { outputFile: "playwright-report/results.json" }],
-];
+const getReporterConfig = (): NonNullable<PlaywrightTestConfig["reporter"]> => {
+  const baseReporter: NonNullable<PlaywrightTestConfig["reporter"]> = [
+    ["playwright-opentelemetry/reporter"],
+    ["html", { open: "on-failure" }],
+    ["junit", xrayOptions],
+    ["list", { printSteps: true }],
+    ["json", { outputFile: "playwright-report/results.json" }],
+  ];
 
-if (testDinoToken) {
-  reporter.unshift(["@testdino/playwright", { token: testDinoToken }]);
-}
+  return testDinoToken
+    ? [["@testdino/playwright", { token: testDinoToken }], ...baseReporter]
+    : baseReporter;
+};
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config: PlaywrightTestConfig = {
+export default defineConfig<PlaywrightOpentelemetryUseOptions>({
   testDir: "./tests",
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
@@ -60,13 +66,14 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. Undefined means that pw will take care of it */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter,
+  reporter: getReporterConfig(),
   /* Shared timeout for all tests. This is useful for long-running tests. */
   globalTimeout: 15 * 60 * 1000, // 15 minutes
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     actionTimeout: 10000,
-    trace: "on-first-retry",
+    playwrightOpentelemetry,
+    trace: "on",
     screenshot: "only-on-failure",
     headless: true, // Set to false if you want to see the browser during tests
   },
@@ -94,6 +101,4 @@ const config: PlaywrightTestConfig = {
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
   outputDir: "test-results/",
-};
-
-export default config;
+});
