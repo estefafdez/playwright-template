@@ -1,5 +1,4 @@
 import { defineConfig, devices } from "@playwright/test";
-import type { PlaywrightTestConfig } from "@playwright/test";
 import type {
   PlaywrightOpentelemetryConfig,
   PlaywrightOpentelemetryUseOptions,
@@ -29,7 +28,7 @@ const xrayOptions = {
 
 const testDinoToken = process.env.TESTDINO_TOKEN?.trim();
 
-const reporter: NonNullable<PlaywrightTestConfig["reporter"]> = [
+const reporter = [
   ["playwright-opentelemetry/reporter"],
   ["html", { open: "on-failure" }],
   ["junit", xrayOptions],
