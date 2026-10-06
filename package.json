@@ -33,7 +33,7 @@
     "playwright-opentelemetry": "^0.13.4"
   },
   "dependencies": {
-    "@testdino/playwright": "^2.2.0",
+    "@testdino/playwright": "^2.7.6",
     "playwright-qase-reporter": "^2.7.0"
   }
 }
