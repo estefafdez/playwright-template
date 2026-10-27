@@ -2,7 +2,19 @@
 
 [![E2E tests](https://github.com/estefafdez/playwright-template/actions/workflows/playwright.yml/badge.svg)](https://github.com/estefafdez/playwright-template/actions/workflows/playwright.yml)
 
-A reference template for learning **Playwright** with **TypeScript**. Includes web and API tests, Page Object Model, test data management, Qase integration and CI-ready configuration.
+A reference template for learning **Playwright** with **TypeScript**. Includes web and API tests, Page Object Model, test data management, Qase integration, Beacon HTML reporting and CI-ready configuration.
+
+---
+
+## Test report
+
+The latest **Beacon** HTML report from `main` is published on GitHub Pages and refreshed on every successful push to `main`:
+
+[![Beacon report dashboard](https://github.com/user-attachments/assets/510e2cb0-6928-47aa-a0be-574a225c2724)](https://estefafdez.com/playwright-template/)
+
+Direct link: <https://estefafdez.com/playwright-template/>
+
+CI also uploads the `beacon-report/` folder as a workflow artifact on every run (30-day retention). To generate the report locally, run `npm test` and open it with `npx beacon open beacon-report`.
 
 ---
 
@@ -22,6 +34,7 @@ Create a `.env` file in the root with the required variables:
 
 ```env
 REQRES_API_KEY=your_api_key
+TESTDINO_TOKEN=your_testdino_token  # optional: TestDino reporting
 ```
 
 ---
@@ -85,7 +98,7 @@ playwright-template/
 - **API helpers:** reusable HTTP client with schema and response-time validation
 - **Environment-based config:** `baseURL` is defined in `playwright.config.ts`, not in code
 - **Qase integration:** tests carry their ID in brackets `[N, Suite]`
-- **CI with GitHub Actions:** configured to run on every push
+- **CI with GitHub Actions:** runs on pushes and PRs to `main`, on a Monday/Wednesday/Friday schedule and on manual dispatch; successful pushes to `main` publish the Beacon report to GitHub Pages
 
 ---
 
