@@ -31,6 +31,7 @@ const testDinoToken = process.env.TESTDINO_TOKEN?.trim() || undefined;
 
 const getReporterConfig = (): NonNullable<PlaywrightTestConfig["reporter"]> => {
   const baseReporter: NonNullable<PlaywrightTestConfig["reporter"]> = [
+    ["beacon-reporter"],
     ["playwright-opentelemetry/reporter"],
     ["html", { open: "on-failure" }],
     ["junit", xrayOptions],
