@@ -6,3 +6,4 @@ node_modules/
 .vscode
 .env
 /beacon-report/
+/.beacon-history/
