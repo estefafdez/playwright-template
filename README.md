@@ -8,7 +8,7 @@ A reference template for learning **Playwright** with **TypeScript**. Includes w
 
 ## Test report
 
-The latest **Beacon** HTML report from `main` is published on GitHub Pages and refreshed on every green run:
+The latest **Beacon** HTML report from `main` is published on GitHub Pages and refreshed on every successful push to `main`:
 
 [![Beacon report dashboard](https://github.com/user-attachments/assets/510e2cb0-6928-47aa-a0be-574a225c2724)](https://estefafdez.com/playwright-template/)
 
@@ -98,7 +98,7 @@ playwright-template/
 - **API helpers:** reusable HTTP client with schema and response-time validation
 - **Environment-based config:** `baseURL` is defined in `playwright.config.ts`, not in code
 - **Qase integration:** tests carry their ID in brackets `[N, Suite]`
-- **CI with GitHub Actions:** runs on pushes and PRs to `main`, on a Monday/Wednesday/Friday schedule and on manual dispatch; green `main` runs publish the Beacon report to GitHub Pages
+- **CI with GitHub Actions:** runs on pushes and PRs to `main`, on a Monday/Wednesday/Friday schedule and on manual dispatch; successful pushes to `main` publish the Beacon report to GitHub Pages
 
 ---
 
