@@ -33,8 +33,9 @@ npx playwright install
 Create a `.env` file in the root with the required variables:
 
 ```env
-REQRES_API_KEY=your_api_key
+REQRES_API_KEY=your_api_key  # only needed when running against https://reqres.in
 TESTDINO_TOKEN=your_testdino_token  # optional: TestDino reporting
+API_BASE_URL=http://localhost:3000  # optional: run the API tests against the local mock API
 ```
 
 ---
@@ -46,6 +47,8 @@ TESTDINO_TOKEN=your_testdino_token  # optional: TestDino reporting
 | `npm test` | Run all tests |
 | `npm run test:web` | Web tests only |
 | `npm run test:api` | API tests only |
+| `npm run api:local` | Start the local mock API on http://localhost:3000 |
+| `npm run test:api:local` | API tests against the local mock API (no rate limits) |
 | `npm run ui` | Open the Playwright interactive UI mode |
 | `npm run debug` | Run in debug mode (step by step) |
 | `npm run report` | Open the last HTML report |
@@ -64,6 +67,7 @@ playwright-template/
 │   ├── HomeElements.ts
 │   ├── NavigationElements.ts
 │   └── TodoElements.ts
+├── local-api/             # Local mock API compatible with reqres.in
 ├── helpers/               # Shared utilities
 │   ├── api-helpers.ts     # HTTP client and schema validators
 │   └── api-setup.ts       # Delay helper to avoid rate limiting
@@ -87,7 +91,24 @@ playwright-template/
 | Project | Base URL | Tests |
 |---|---|---|
 | `web` | https://testing.qaautomationlabs.com | `tests/web/` |
-| `api` | https://reqres.in | `tests/api/` |
+| `api` | https://reqres.in (or `API_BASE_URL` when set) | `tests/api/` |
+
+---
+
+## Running the API tests against a local API
+
+The API tests hit [reqres.in](https://reqres.in) by default, whose free plan
+applies rate limits (HTTP 429 once the quota is exhausted). To run them without
+external limits, this template ships a zero-dependency local mock of that API in
+[`local-api/`](local-api/README.md):
+
+```bash
+npm run test:api:local
+```
+
+The Playwright config starts the mock automatically when `API_BASE_URL` points
+to localhost, so no test code changes are needed; the same specs run against
+either backend.
 
 ---
 
