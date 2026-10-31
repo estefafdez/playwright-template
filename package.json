@@ -11,7 +11,9 @@
     "debug": "npx playwright test --debug",
     "test:api": "npx playwright test --project=api",
     "test:web": "npx playwright test --project=web",
-    "report": "npx playwright show-report"
+    "report": "npx playwright show-report",
+    "api:local": "node local-api/server.js",
+    "test:api:local": "API_BASE_URL=http://localhost:3000 npx playwright test --project=api"
   },
   "repository": {
     "type": "git",
