@@ -15,13 +15,13 @@ test.describe("API Advanced Testing - Performance & Security", () => {
   });
 
   test.describe("Error Handling Tests", () => {
-    test.skip("[40, API] should handle malformed JSON gracefully", async () => {
+    test("[40, API] should handle malformed JSON gracefully", async () => {
       const response = await apiHelper.makeRequest("POST", "/api/users", {
         headers: {
           "x-api-key": "reqres-free-v1",
           "Content-Type": "application/json",
         },
-        data: '{"name": "test", "job": }',
+        data: Buffer.from('{"name": "test", "job": }'),
       });
 
       expect([400, 422, 500]).toContain(response.status);
