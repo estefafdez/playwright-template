@@ -85,7 +85,7 @@ export default defineConfig<PlaywrightOpentelemetryUseOptions>({
       testMatch: "api/**/*",
       testDir: "./tests/api",
       use: {
-        baseURL: "https://reqres.in",
+        baseURL: process.env.API_BASE_URL || "https://reqres.in",
         ...devices["Desktop Chrome"],
       },
     },
@@ -99,6 +99,18 @@ export default defineConfig<PlaywrightOpentelemetryUseOptions>({
       },
     },
   ],
+
+  /* Start the local Reqres-compatible API automatically when API_BASE_URL points to localhost */
+  ...(process.env.API_BASE_URL && /localhost|127\.0\.0\.1/.test(process.env.API_BASE_URL)
+    ? {
+        webServer: {
+          command: "node local-api/server.js",
+          url: `${process.env.API_BASE_URL}/api/users/1`,
+          reuseExistingServer: !process.env.CI,
+          timeout: 10 * 1000,
+        },
+      }
+    : {}),
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
   outputDir: "test-results/",
