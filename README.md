@@ -120,6 +120,7 @@ either backend.
 - **Environment-based config:** `baseURL` is defined in `playwright.config.ts`, not in code
 - **Qase integration:** tests carry their ID in brackets `[N, Suite]`
 - **CI with GitHub Actions:** runs on pushes and PRs to `main`, on a Monday/Wednesday/Friday schedule and on manual dispatch; successful pushes to `main` publish the Beacon report to GitHub Pages
+- **Changelog generation (trial):** the manual `Changelog Bot (dry run)` workflow ([necoz-oss/changelog-bot](https://github.com/necoz-oss/changelog-bot)) prints a generated changelog to the run log from git history and PR metadata. It is hardcoded to dry-run with read-only permissions, so it never modifies the repo, and its heuristic mode needs no LLM API keys
 
 ---
 
