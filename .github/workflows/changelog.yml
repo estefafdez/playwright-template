@@ -1,0 +1,32 @@
+name: Changelog Bot (dry run)
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Git ref (tag or HEAD) to generate the changelog for'
+        required: false
+        default: 'HEAD'
+      release_name:
+        description: "Display name for the version (without 'v')"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: necoz-oss/changelog-bot@v0.11.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release-tag: ${{ inputs.release_tag }}
+          release-name: ${{ inputs.release_name }}
+          changelog-path: CHANGELOG.md
+          no-ai: 'true'
+          dry-run: 'true'
