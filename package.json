@@ -37,6 +37,6 @@
   },
   "dependencies": {
     "@testdino/playwright": "^2.11.1",
-    "playwright-qase-reporter": "^2.8.0"
+    "playwright-qase-reporter": "^2.8.1"
   }
 }
